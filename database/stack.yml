@@ -21,10 +21,8 @@ services:
       - 8080:8080
     networks:
      - back
-    depends_on: 
-      - db
      
- spring:
+  spring:
     build:
       context: ../airbnb-light # Use an image built from the specified dockerfile in the `polling-app-server` directory.
       dockerfile: Dockerfile
