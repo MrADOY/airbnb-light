@@ -10,7 +10,7 @@ services:
       - MYSQL_ROOT_PASSWORD=nimporte
       - MYSQL_DATABASE=airbnb
     ports:
-      - 3333:3306
+      - 3306:3306
     networks:
      - back
 
@@ -24,14 +24,14 @@ services:
      
   spring:
     build:
-      context: ../airbnb-light # Use an image built from the specified dockerfile in the `polling-app-server` directory.
+      context: ../airbnb-light
       dockerfile: Dockerfile
     ports:
       - 8081:8081
     restart: unless-stopped
     depends_on: 
       - db
-    environment: # Pass environment variables to the service
+    environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/airbnb?useSSL=false
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: nimporte     
