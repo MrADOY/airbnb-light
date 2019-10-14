@@ -1,11 +1,27 @@
 # Use root/example as user/password credentials
 version: '3.1'
 
-services:
+services:   
+  spring:
+    build:
+      context: ../airbnb-light
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081
+    restart: no
+    depends_on: 
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/airbnb?useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: nimporte     
+    networks:
+      - back
+
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
-    restart: unless-stopped
+    restart: no
     environment:
       - MYSQL_ROOT_PASSWORD=nimporte
       - MYSQL_DATABASE=airbnb
@@ -16,27 +32,11 @@ services:
 
   adminer:
     image: adminer
-    restart: unless-stopped
+    restart: no
     ports:
       - 8080:8080
     networks:
      - back
-     
-  spring:
-    build:
-      context: ../airbnb-light
-      dockerfile: Dockerfile
-    ports:
-      - 8081:8081
-    restart: unless-stopped
-    depends_on: 
-      - db
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/airbnb?useSSL=false
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: nimporte     
-    networks:
-      - back
-      
+
 networks:
   back:
