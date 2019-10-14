@@ -2,19 +2,26 @@
 version: '3.1'
 
 services:
-
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=nimporte
       - MYSQL_DATABASE=airbnb
     ports:
       - 3333:3306
+    networks:
+     - back
 
   adminer:
     image: adminer
-    restart: always
+    restart: unless-stopped
     ports:
       - 8080:8080
+    networks:
+     - back
+     
+networks:
+  back:
+    driver: bridge
