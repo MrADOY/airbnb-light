@@ -21,6 +21,8 @@ services:
       - 8080:8080
     networks:
      - back
+    depends_on: 
+      - db
      
  spring:
     build:
@@ -40,4 +42,3 @@ services:
       
 networks:
   back:
-    driver: bridge
