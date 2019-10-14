@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8081:8081
-    restart: no
+    restart: "no"
     depends_on: 
       - db
     environment:
@@ -21,7 +21,7 @@ services:
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
-    restart: no
+    restart: "no"
     environment:
       - MYSQL_ROOT_PASSWORD=nimporte
       - MYSQL_DATABASE=airbnb
@@ -32,7 +32,7 @@ services:
 
   adminer:
     image: adminer
-    restart: no
+    restart: "no"
     ports:
       - 8080:8080
     networks:
