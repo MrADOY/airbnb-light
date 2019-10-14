@@ -22,6 +22,22 @@ services:
     networks:
      - back
      
+ spring:
+    build:
+      context: ../airbnb-light # Use an image built from the specified dockerfile in the `polling-app-server` directory.
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081
+    restart: unless-stopped
+    depends_on: 
+      - db
+    environment: # Pass environment variables to the service
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/airbnb?useSSL=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: nimporte     
+    networks:
+      - back
+      
 networks:
   back:
     driver: bridge
