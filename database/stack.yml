@@ -8,7 +8,8 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: nimporte
+      - MYSQL_ROOT_PASSWORD=nimporte
+      - MYSQL_DATABASE=airbnb
     ports:
       - 3333:3306
 
