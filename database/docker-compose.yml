@@ -14,8 +14,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/airbnb?useSSL=false
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: nimporte     
-      WAIT_HOSTS: db:3306
+      SPRING_DATASOURCE_PASSWORD: nimporte
     networks:
       - back
 
