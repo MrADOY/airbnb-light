@@ -1,28 +1,30 @@
-
-<!DOCTYPE HTML>
-<html xmlns:form="http://www.w3.org/1999/html">
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{template.html}">
 <head>
-    <title>USER</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <title>Votre compte</title>
 </head>
 <body>
-<h1>User</h1>
-<a th:text="${username}"></a>
-<a th:text="${nom}"></a>
-<a th:text="${prenom}"></a>
+  <section layout:fragment="body">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Votre compte</h1>
+          <a th:text="${username}"></a>
+          <a th:text="${nom}"></a>
+          <a th:text="${prenom}"></a>
 
-<table>
-    <tr th:each="annonce : ${annonces}">
-        <td><a th:text="${annonce.id}"></a></td>
-        <td><a th:text="${annonce.typeHebergement}"></a></td>
-        <td><a th:text="${annonce.nbPlace}"></a></td>
-        <td><a th:text="${annonce.available}"></a></td>
-    </tr>
-</table>
-
+          <table>
+            <tr th:each="annonce : ${annonces}">
+              <td><a th:text="${annonce.id}"></a></td>
+              <td><a th:text="${annonce.typeHebergement}"></a></td>
+              <td><a th:text="${annonce.nbPlace}"></a></td>
+              <td><a th:text="${annonce.available}"></a></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
