@@ -1,6 +1,9 @@
 package com.istv.airbnblight.controller;
 
 import com.istv.airbnblight.config.UtilisateurPrincipal;
+import com.istv.airbnblight.service.HebergementService;
+import com.istv.airbnblight.service.UtilisateurService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MainController {
+
+    @Autowired
+    private HebergementService herbergementService;
 
     @GetMapping("/")
     public String root() {
@@ -38,6 +44,11 @@ public class MainController {
         model.addAttribute("username", username);
         model.addAttribute("prenom", prenom);
         model.addAttribute("nom", nom);
+
+
+        model.addAttribute("annonces", herbergementService.findAll());
+
+
         return "user";
     }
 }
