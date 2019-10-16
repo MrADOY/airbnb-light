@@ -39,4 +39,4 @@ RUN chmod +x /wait
 ## Launch the wait tool and then your application
 CMD /wait
 
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.istv.airbnblight.AirbnbLightApplication"]
+ENTRYPOINT ["java","-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n", "-cp","app:app/lib/*","com.istv.airbnblight.AirbnbLightApplication"]
