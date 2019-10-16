@@ -1,9 +1,11 @@
 # airbnb-light
 ## Démarrage de la base de données
 ```
-docker stack deploy -c stack.yml mysql
+cd database
+docker stack deploy -c docker-compose.yml mysql
 ```
 ou (si docker-compose est installé)
 ```
-docker-compose -f stack.yml up
+cd database
+docker-compose up
 ```
