@@ -1,11 +1,13 @@
 package com.istv.airbnblight.service;
 
 import com.istv.airbnblight.config.UtilisateurPrincipal;
+import com.istv.airbnblight.model.Hebergement;
 import com.istv.airbnblight.model.Reservation;
 import com.istv.airbnblight.model.odt.EnregistrementUtilisateurOdt;
 import com.istv.airbnblight.model.Role;
 import com.istv.airbnblight.model.Utilisateur;
 import com.istv.airbnblight.model.odt.ReservationServiceOdt;
+import com.istv.airbnblight.repository.HebergementRepository;
 import com.istv.airbnblight.repository.ReservationRepository;
 import com.istv.airbnblight.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class ReservationServiceImpl implements ReservationService {
     ReservationRepository reservationRepository;
 
     @Autowired
+    HebergementRepository hebergementRepository;
+
+    @Autowired
     UtilisateurRepository utilisateurRepository;
 
     @Override
@@ -30,11 +35,17 @@ public class ReservationServiceImpl implements ReservationService {
         if (principal instanceof UtilisateurPrincipal) {
             idLoueur = ((UtilisateurPrincipal) principal).getId();
         }
+
         Reservation res = new Reservation();
         res.setLoueur(utilisateurRepository.findById(idLoueur).get());
-        res.setProprietaire(reservationRepository.findById(registration.getIdHebergement()).get().getProprietaire());
+
+        Hebergement her = hebergementRepository.findById(registration.getIdHebergement()).get();
+        res.setProprietaire(her.getProprietaire());
+        her.setAvailable(false);
+        hebergementRepository.save(her);
         res.setDe(registration.getDe());
         res.setA(registration.getA());
+        res.setHebergement(her);
         return reservationRepository.save(res);
     }
 }

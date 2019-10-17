@@ -18,10 +18,22 @@ public class Reservation {
     @JoinColumn(name = "proprietaire")
     private Utilisateur proprietaire;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "herbergement")
+    private Hebergement hebergement;
+
     private long de;
 
     private long a;
 
+
+    public Hebergement getHebergement() {
+        return hebergement;
+    }
+
+    public void setHebergement(Hebergement hebergement) {
+        this.hebergement = hebergement;
+    }
 
     public int getId() {
         return id;
