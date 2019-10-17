@@ -26,7 +26,10 @@ layout:decorate="~{template.html}">
                 <td><span th:text="${annonce.nbPlace}"></span></td>
                 <td><span th:text="${annonce.available}"></span></td>
                 <td><span th:text="${annonce.proprietaire.firstName + ' ' + annonce.proprietaire.lastName}"></span></td>
-                <td><a class="btn btn-success" th:href="@{/reservation/{id}/details(id=${annonce.id})}">Réserver ce bien</a></td>
+                <td th:switch="${annonce.available}">
+                  <a th:case="true" class="btn btn-success" th:href="@{/reservation/reserver(id_hebergement=${annonce.id})}">Réserver ce bien</a>
+                  <a th:case="false" class="btn btn-danger disabled" role="button" aria-disabled="true">Bien indisponible</a>
+                </td>
               </tr>
             </tbody>
           </table>

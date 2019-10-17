@@ -38,8 +38,7 @@ public class ReservationController {
     }
 
     @GetMapping("/reservation/reserver")
-    public String registerUserAccount(@RequestParam("id_hebergement") @Valid long id_hebergement,
-                                      BindingResult result, Model model){
+    public String registerUserAccount(Model model, @RequestParam(name = "id_hebergement") long id_hebergement){
         Hebergement hebergement = hebergementService.findById(id_hebergement);
 
         model.addAttribute("hebergement", hebergement);
