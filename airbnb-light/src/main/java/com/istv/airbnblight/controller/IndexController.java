@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class MainController {
+public class IndexController {
 
     @Autowired
     private HebergementService herbergementService;
@@ -45,10 +45,17 @@ public class MainController {
         model.addAttribute("prenom", prenom);
         model.addAttribute("nom", nom);
 
+        return "user";
+    }
+
+    @GetMapping("/reservation")
+    public String reservationIndex(Model model) {
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         model.addAttribute("annonces", herbergementService.findAll());
 
 
-        return "user";
+        return "reservation";
     }
 }

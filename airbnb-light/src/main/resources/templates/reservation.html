@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{template.html}">
+<head>
+  <title>Votre compte</title>
+</head>
+<body>
+  <section layout:fragment="body">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Logements disponibles</h1>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Type d'hébergement</th>
+                <th>Nombre de places</th>
+                <th>Disponibilité</th>
+                <th>Propriétaire</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="annonce : ${annonces}" th:classappend="${!annonce.available ? 'table-warning':''}">
+                <td><span th:text="${annonce.typeHebergement}"></span></td>
+                <td><span th:text="${annonce.nbPlace}"></span></td>
+                <td><span th:text="${annonce.available}"></span></td>
+                <td><span th:text="${annonce.proprietaire.firstName + ' ' + annonce.proprietaire.lastName}"></span></td>
+                <td><a class="btn btn-success" th:href="@{/reservation/{id}/details(id=${annonce.id})}">Réserver ce bien</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

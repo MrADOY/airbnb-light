@@ -43,9 +43,19 @@ services:
     networks:
      - back
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+     - PMA_ARBITRARY=1
+    restart: "no"
+    ports:
+     - 8083:80
+    networks:
+     - back
+
 networks:
   back:
 
 volumes:
   db-data:
-
