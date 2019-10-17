@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface HebergementService {
     List<Hebergement> findAll();
+    Hebergement findById(long id);
 }

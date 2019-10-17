@@ -21,4 +21,8 @@ public class HebergementServiceImpl implements HebergementService {
                 .collect(Collectors.toList());
     }
 
+    public Hebergement findById(long id){
+        return hebergementRepository.findById(id).get();
+    }
+
 }
