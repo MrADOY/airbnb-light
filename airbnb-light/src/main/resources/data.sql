@@ -13,34 +13,34 @@ INSERT INTO `user` (`id`, `email`, `first_name`, `last_name`, `password`) VALUES
 insert
   into
     accommodation
-      (type_hebergement,nb_place,img, available)
+      (type_hebergement,nb_place,img, available, proprietaire_id)
     values
-      ('MAISON',3, null, true);
+      ('MAISON',3, null, true, 1);
 
 insert
   into
     accommodation
-      (type_hebergement,nb_place,img, available)
+      (type_hebergement,nb_place,img, available, proprietaire_id)
     values
-      ('APPARTEMENT',4, null, true);
+      ('APPARTEMENT',4, null, true, 4);
 
 insert
   into
     accommodation
-      (type_hebergement,nb_place,img, available)
+      (type_hebergement,nb_place,img, available, proprietaire_id)
     values
-      ('MAISON',5, null, false);
+      ('MAISON',5, null, false, 3);
 
 insert
   into
     accommodation
-      (type_hebergement,nb_place,img, available)
+      (type_hebergement,nb_place,img, available, proprietaire_id)
     values
-      ('MAISON',3, null, true);
+      ('MAISON',3, null, true, 2);
 
 insert
   into
     accommodation
-      (type_hebergement,nb_place,img, available)
+      (type_hebergement,nb_place,img, available, proprietaire_id)
     values
-      ('MAISON',3, null, true);
+      ('MAISON',3, null, true, 1);

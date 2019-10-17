@@ -1,6 +1,7 @@
 package com.istv.airbnblight.model;
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -32,6 +33,10 @@ public class Utilisateur {
     @Size(max = 100)
 
     private String password;
+
+    @OneToMany(mappedBy="proprietaire")
+    private List<Hebergement> hebergements;
+
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -106,6 +111,14 @@ public class Utilisateur {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Hebergement> getHebergements() {
+        return hebergements;
+    }
+
+    public void setHebergements(List<Hebergement> hebergements) {
+        this.hebergements = hebergements;
     }
 
     @Override

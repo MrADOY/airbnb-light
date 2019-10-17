@@ -1,6 +1,6 @@
 package com.istv.airbnblight.service;
 
-import com.istv.airbnblight.model.EnregistrementUtilisateurOdt;
+import com.istv.airbnblight.model.odt.EnregistrementUtilisateurOdt;
 import com.istv.airbnblight.model.Utilisateur;
 
 public interface UtilisateurService {

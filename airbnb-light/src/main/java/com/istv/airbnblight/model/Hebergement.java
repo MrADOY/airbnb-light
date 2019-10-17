@@ -17,6 +17,9 @@ public class Hebergement {
 
     private boolean available;
 
+    @ManyToOne
+    private Utilisateur proprietaire;
+
     public Long getId() {
         return id;
     }
@@ -55,5 +58,13 @@ public class Hebergement {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public Utilisateur getProprietaire() {
+        return proprietaire;
+    }
+
+    public void setProprietaire(Utilisateur proprietaire) {
+        this.proprietaire = proprietaire;
     }
 }

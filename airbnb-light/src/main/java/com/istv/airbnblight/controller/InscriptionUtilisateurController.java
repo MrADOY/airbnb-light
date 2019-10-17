@@ -1,7 +1,7 @@
 package com.istv.airbnblight.controller;
 
 import com.istv.airbnblight.model.Utilisateur;
-import com.istv.airbnblight.model.EnregistrementUtilisateurOdt;
+import com.istv.airbnblight.model.odt.EnregistrementUtilisateurOdt;
 import com.istv.airbnblight.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

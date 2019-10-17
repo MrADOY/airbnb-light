@@ -1,4 +1,4 @@
-package com.istv.airbnblight.model;
+package com.istv.airbnblight.model.odt;
 
 
 import javax.validation.constraints.AssertTrue;
