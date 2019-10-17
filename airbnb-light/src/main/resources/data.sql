@@ -13,34 +13,34 @@ INSERT INTO `user` (`id`, `email`, `first_name`, `last_name`, `password`) VALUES
 insert
   into
     accommodation
-      (type_hebergement,nb_place,img, available, proprietaire_id)
+      (type_hebergement,nb_place,img, available, proprietaire_id, prix_jour, prix_pers)
     values
-      ('MAISON',3, null, true, 1);
+      ('MAISON',3, "https://www.maisons-moyse.fr/typo3temp/_processed_/csm_slide3_6a822d9089.jpg", true, 1, 504.54, null);
 
 insert
   into
     accommodation
-      (type_hebergement,nb_place,img, available, proprietaire_id)
+      (type_hebergement,nb_place,img, available, proprietaire_id, prix_jour, prix_pers)
     values
-      ('APPARTEMENT',4, null, true, 4);
+      ('APPARTEMENT',4, null, true, 4, null, 640);
 
 insert
   into
     accommodation
-      (type_hebergement,nb_place,img, available, proprietaire_id)
+      (type_hebergement,nb_place,img, available, proprietaire_id, prix_jour, prix_pers)
     values
-      ('MAISON',5, null, false, 3);
+      ('MAISON',5, null, false, 3, 465, null);
 
 insert
   into
     accommodation
-      (type_hebergement,nb_place,img, available, proprietaire_id)
+      (type_hebergement,nb_place,img, available, proprietaire_id, prix_jour, prix_pers)
     values
-      ('MAISON',3, null, true, 2);
+      ('MAISON',3, null, true, 2, null, 247);
 
 insert
   into
     accommodation
-      (type_hebergement,nb_place,img, available, proprietaire_id)
+      (type_hebergement,nb_place,img, available, proprietaire_id, prix_jour, prix_pers)
     values
-      ('MAISON',3, null, true, 1);
+      ('MAISON',3, null, true, 1, null, 745);

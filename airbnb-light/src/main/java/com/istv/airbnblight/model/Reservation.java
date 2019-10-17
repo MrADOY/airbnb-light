@@ -15,16 +15,12 @@ public class Reservation {
     private Utilisateur loueur;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "proprietaire")
-    private Utilisateur proprietaire;
-
-    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "herbergement")
     private Hebergement hebergement;
 
-    private long de;
+    private long start;
 
-    private long a;
+    private long end;
 
 
     public Hebergement getHebergement() {
@@ -51,27 +47,19 @@ public class Reservation {
         this.loueur = loueur;
     }
 
-    public Utilisateur getProprietaire() {
-        return proprietaire;
+    public long getStart() {
+        return start;
     }
 
-    public void setProprietaire(Utilisateur proprietaire) {
-        this.proprietaire = proprietaire;
+    public void setStart(long start) {
+        this.start = start;
     }
 
-    public long getDe() {
-        return de;
+    public long getEnd() {
+        return end;
     }
 
-    public void setDe(long de) {
-        this.de = de;
-    }
-
-    public long getA() {
-        return a;
-    }
-
-    public void setA(long a) {
-        this.a = a;
+    public void setEnd(long end) {
+        this.end = end;
     }
 }

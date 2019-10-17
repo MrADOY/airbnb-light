@@ -3,7 +3,6 @@ package com.istv.airbnblight.controller;
 import com.istv.airbnblight.model.Hebergement;
 import com.istv.airbnblight.model.Reservation;
 import com.istv.airbnblight.model.Utilisateur;
-import com.istv.airbnblight.model.odt.EnregistrementUtilisateurOdt;
 import com.istv.airbnblight.model.odt.ReservationServiceOdt;
 import com.istv.airbnblight.service.HebergementService;
 import com.istv.airbnblight.service.ReservationService;
@@ -25,13 +24,13 @@ public class ReservationController {
     @Autowired
     private HebergementService hebergementService;
 
-    @ModelAttribute("reservationodt")
-    public EnregistrementUtilisateurOdt userRegistrationDto() {
-        return new EnregistrementUtilisateurOdt();
+    @ModelAttribute("reservation")
+    public ReservationServiceOdt reservationDto() {
+        return new ReservationServiceOdt();
     }
 
     @PostMapping("/reservation")
-    public String registerUserAccount(@ModelAttribute("reservationodt") @Valid ReservationServiceOdt resOdt,
+    public String registerUserAccount(@ModelAttribute("reservation") @Valid ReservationServiceOdt resOdt,
                                       BindingResult result){
         Reservation existing = reservationService.save(resOdt);
         return "redirect:/reservation?success";

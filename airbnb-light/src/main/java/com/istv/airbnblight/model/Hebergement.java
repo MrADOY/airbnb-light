@@ -13,9 +13,25 @@ public class Hebergement {
 
     private String nbPlace;
 
+    private String nom;
+
+    private String description;
+
+    private String adresse;
+
+    private String ville;
+
+    private String pays;
+
+    private String cp;
+
+    private Double prixJour;
+
+    private Double prixPers;
+
     private String img;
 
-    private boolean available;
+    private boolean available = true;
 
     @ManyToOne
     private Utilisateur proprietaire;
@@ -36,12 +52,76 @@ public class Hebergement {
         this.typeHebergement = typeHebergement;
     }
 
+    public void setNbPlace(String nbPlace) {
+      this.nbPlace = nbPlace;
+    }
+
     public String getNbPlace() {
         return nbPlace;
     }
 
-    public void setNbPlace(String nbPlace) {
-        this.nbPlace = nbPlace;
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setPays(String pays) {
+        this.pays = pays;
+    }
+
+    public String getPays() {
+        return pays;
+    }
+
+    public void setCp(String cp) {
+        this.cp = cp;
+    }
+
+    public String getCp() {
+        return cp;
+    }
+
+    public Double getPrixJour() {
+        return prixJour;
+    }
+
+    public void setPrixJour(Double prixJour) {
+        this.prixJour = prixJour;
+    }
+
+    public Double getPrixPers() {
+        return prixPers;
+    }
+
+    public void setPrixPers(Double prixPers) {
+        this.prixPers = prixPers;
     }
 
     public String getImg() {

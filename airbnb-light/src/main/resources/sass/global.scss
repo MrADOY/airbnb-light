@@ -10,3 +10,49 @@ body {
 .main_content {
   flex: 1 0 auto;
 }
+
+.material-icons-outlined, .material-icons {
+  vertical-align: middle;
+}
+
+td {
+  .btn {
+    margin: 0;
+    padding: 5px;
+  }
+  .btn:not(:last-child) {
+    margin-right: 2px;
+  }
+}
+
+.btn-round {
+  border-radius: 30px;
+
+  &.btn-fab {
+    border-radius: 50%;
+  }
+}
+
+.btn-fab {
+  font-size: 24px;
+  height: 41px;
+  min-width: 41px;
+  width: 41px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  line-height: 41px;
+}
+
+.bottom_price {
+  left: 0px !important;
+  bottom: 0px !important;
+  width: 100% !important;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 9px 3px !important;
+  z-index: 5 !important;
+  padding: 10px 0px !important;
+  transition: background-color 0.25s ease 0s, color 0.25s ease 0s !important;
+  position: fixed !important;
+  border-top: medium none !important;
+  background-color: rgb(14, 14, 14) !important;
+}

@@ -42,7 +42,7 @@ public class InscriptionUtilisateurController {
         }
 
         utilisateurService.save(userDto);
-        return "redirect:/registration?success";
+        return "redirect:/login";
     }
 
 }

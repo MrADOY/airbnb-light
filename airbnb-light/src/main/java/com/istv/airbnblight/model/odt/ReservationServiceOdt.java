@@ -4,9 +4,9 @@ public class ReservationServiceOdt {
 
     private long idHebergement;
 
-    private long de;
+    private long start;
 
-    private long a;
+    private long end;
 
     public ReservationServiceOdt() {
     }
@@ -19,19 +19,19 @@ public class ReservationServiceOdt {
         this.idHebergement = idHebergement;
     }
 
-    public long getDe() {
-        return de;
+    public long getStart() {
+        return start;
     }
 
-    public void setDe(long de) {
-        this.de = de;
+    public void setStart(long start) {
+        this.start = start;
     }
 
-    public long getA() {
-        return a;
+    public long getEnd() {
+        return end;
     }
 
-    public void setA(long a) {
-        this.a = a;
+    public void setEnd(long end) {
+        this.end = end;
     }
 }

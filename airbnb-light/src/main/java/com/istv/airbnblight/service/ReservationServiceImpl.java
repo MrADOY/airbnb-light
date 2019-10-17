@@ -40,11 +40,10 @@ public class ReservationServiceImpl implements ReservationService {
         res.setLoueur(utilisateurRepository.findById(idLoueur).get());
 
         Hebergement her = hebergementRepository.findById(registration.getIdHebergement()).get();
-        res.setProprietaire(her.getProprietaire());
         her.setAvailable(false);
         hebergementRepository.save(her);
-        res.setDe(registration.getDe());
-        res.setA(registration.getA());
+        res.setStart(registration.getStart());
+        res.setEnd(registration.getEnd());
         res.setHebergement(her);
         return reservationRepository.save(res);
     }

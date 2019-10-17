@@ -15,20 +15,21 @@ layout:decorate="~{template.html}">
               <tr>
                 <th>Type d'hébergement</th>
                 <th>Nombre de places</th>
-                <th>Disponibilité</th>
                 <th>Propriétaire</th>
-                <th>Actions</th>
+                <th class="text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr th:each="annonce : ${annonces}" th:classappend="${!annonce.available ? 'table-warning':''}">
                 <td><span th:text="${annonce.typeHebergement}"></span></td>
                 <td><span th:text="${annonce.nbPlace}"></span></td>
-                <td><span th:text="${annonce.available}"></span></td>
                 <td><span th:text="${annonce.proprietaire.firstName + ' ' + annonce.proprietaire.lastName}"></span></td>
-                <td th:switch="${annonce.available}">
-                  <a th:case="true" class="btn btn-success" th:href="@{/reservation/reserver(id_hebergement=${annonce.id})}">Réserver ce bien</a>
-                  <a th:case="false" class="btn btn-danger disabled" role="button" aria-disabled="true">Bien indisponible</a>
+                <td class="text-right">
+                  <div th:switch="${annonce.available}">
+                    <a class="btn btn-info btn-fab btn-round" th:href="@{/hebergement/{id}/show(id=${annonce.id})}"><i class="material-icons">visibility</i></a>
+                    <a th:case="true" class="btn btn-success" th:href="@{/reservation/reserver(id_hebergement=${annonce.id})}">Réserver ce bien</a>
+                    <a th:case="false" class="btn btn-danger disabled text-white" role="button" aria-disabled="true">Bien indisponible</a>
+                  </div>
                 </td>
               </tr>
             </tbody>

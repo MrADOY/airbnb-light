@@ -6,26 +6,29 @@ layout:decorate="~{template.html}">
 </head>
 <body>
   <section layout:fragment="body">
-<div class="container">
-    <div class="row">
+    <div class="container">
+      <div class="row">
         <div class="col-md-12">
-            <div th:if="${param.success}">
-                <div class="alert alert-info">
-                    Vous êtes désormais enregistré sur la plateforme, vous vous connecter en cliquant <a href="/" th:href="@{/login}">ici</a>
-                </div>
+          <h1 class="text-center">Demande de location</h1>
+          <form th:action="@{/reservation}" th:object="${reservation}" method="post">
+            <input name="hebergement" type="hidden" th:value="${hebergement.id}" />
+            <div class="form-group" th:classappend="${#fields.hasErrors('start')}? 'has-error':''">
+              <label for="start" class="control-label">Date de début</label>
+              <input id="start" class="form-control" th:field="*{start}"/>
+              <p class="error-message" th:each="error : ${#fields.errors('start')}" th:text="${error}">Erreur de validation</p>
             </div>
-
-            <h1 class="text-center">Enregistrement</h1>
-            <form th:action="@{/reservation}" th:object="${annonce}" method="post">
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success">S'enregistrer</button>
-                    <span>Déjà enregistré ? <a href="/" th:href="@{/login}">Connectez-vous ici</a></span>
-                </div>
-            </form>
+            <div class="form-group" th:classappend="${#fields.hasErrors('end')}? 'has-error':''">
+              <label for="end" class="control-label">Date de fin</label>
+              <input id="end" class="form-control" th:field="*{end}"/>
+              <p class="error-message" th:each="error : ${#fields.errors('end')}" th:text="${error}">Erreur de validation</p>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-success">Demander la location</button>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
-</div>
-</section>
+  </section>
 </body>
 </html>
