@@ -11,7 +11,7 @@ layout:decorate="~{template.html}">
         <div class="col-md-12">
           <h1 class="text-center">Demande de location</h1>
           <form th:action="@{/reservation}" th:object="${reservation}" method="post">
-            <input name="hebergement" type="hidden" th:value="${hebergement.id}" />
+            <input name="idHebergement" type="hidden" th:value="${hebergement.id}" />
             <div class="form-group" th:classappend="${#fields.hasErrors('start')}? 'has-error':''">
               <label for="start" class="control-label">Date de début</label>
               <input id="start" type="date" class="form-control" th:field="*{start}"/>
