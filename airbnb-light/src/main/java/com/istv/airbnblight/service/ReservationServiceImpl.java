@@ -31,13 +31,13 @@ public class ReservationServiceImpl implements ReservationService {
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        long idLoueur = 0;
+        long idLocataire = 0;
         if (principal instanceof UtilisateurPrincipal) {
-            idLoueur = ((UtilisateurPrincipal) principal).getId();
+            idLocataire = ((UtilisateurPrincipal) principal).getId();
         }
 
         Reservation res = new Reservation();
-        res.setLoueur(utilisateurRepository.findById(idLoueur).get());
+        res.setLocataire(utilisateurRepository.findById(idLocataire).get());
 
         Hebergement her = hebergementRepository.findById(registration.getIdHebergement()).get();
         her.setAvailable(false);

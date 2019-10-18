@@ -1,12 +1,20 @@
 package com.istv.airbnblight.model.odt;
 
+import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+import com.istv.airbnblight.model.Utilisateur;
+
 public class ReservationServiceOdt {
 
     private long idHebergement;
 
-    private long start;
+    private Utilisateur locataire;
 
-    private long end;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date start;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date end;
 
     public ReservationServiceOdt() {
     }
@@ -19,19 +27,27 @@ public class ReservationServiceOdt {
         this.idHebergement = idHebergement;
     }
 
-    public long getStart() {
+    public Date getStart() {
         return start;
     }
 
-    public void setStart(long start) {
+    public void setStart(Date start) {
         this.start = start;
     }
 
-    public long getEnd() {
+    public Utilisateur getLocataire() {
+        return locataire;
+    }
+
+    public void setLocataire(Utilisateur locataire) {
+        this.locataire = locataire;
+    }
+
+    public Date getEnd() {
         return end;
     }
 
-    public void setEnd(long end) {
+    public void setEnd(Date end) {
         this.end = end;
     }
 }

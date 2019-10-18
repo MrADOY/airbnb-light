@@ -2,6 +2,9 @@ package com.istv.airbnblight.model;
 
 
 import javax.persistence.*;
+import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+import com.istv.airbnblight.model.Utilisateur;
 
 @Entity
 public class Reservation {
@@ -11,16 +14,18 @@ public class Reservation {
     private int id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "loueur")
-    private Utilisateur loueur;
+    @JoinColumn(name = "locataire")
+    private Utilisateur locataire;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "herbergement")
     private Hebergement hebergement;
 
-    private long start;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date start;
 
-    private long end;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date end;
 
 
     public Hebergement getHebergement() {
@@ -39,27 +44,27 @@ public class Reservation {
         this.id = id;
     }
 
-    public Utilisateur getLoueur() {
-        return loueur;
+    public Utilisateur getLocataire() {
+        return locataire;
     }
 
-    public void setLoueur(Utilisateur loueur) {
-        this.loueur = loueur;
+    public void setLocataire(Utilisateur locataire) {
+        this.locataire = locataire;
     }
 
-    public long getStart() {
+    public Date getStart() {
         return start;
     }
 
-    public void setStart(long start) {
+    public void setStart(Date start) {
         this.start = start;
     }
 
-    public long getEnd() {
+    public Date getEnd() {
         return end;
     }
 
-    public void setEnd(long end) {
+    public void setEnd(Date end) {
         this.end = end;
     }
 }
