@@ -1,0 +1,56 @@
+.bg-blue {
+	background: $custom-blue-500 !important;
+}
+
+.bg-blue-gradiant {
+	background: linear-gradient(60deg, $custom-blue-400, $custom-blue-600) !important;
+}
+
+.bg-rose {
+	background: $pink !important;
+}
+
+.bg-rose-gradiant {
+	background: linear-gradient(60deg, $pink-400, $pink-600) !important;
+}
+
+.bg-red {
+	background: $red !important;
+}
+
+.bg-red-gradiant {
+	background: linear-gradient(60deg, $red-400, $red-600) !important;
+}
+
+.bootstrap-select span.text {
+	white-space: pre;
+}
+
+.swal2-content {
+	.table {
+		border-spacing: 1rem;
+		border-collapse: separate;
+
+		#tbody_uploaded td {
+			border-radius: 10px;
+			background-color: #efefef;
+
+			label {
+				color: $text-color;
+			}
+		}
+	}
+}
+
+.bmd-form-group .form-control, .bmd-form-group label, .bmd-form-group input::placeholder {
+	line-height: inherit;
+}
+
+.transition-fade {
+  transition: 0.4s;
+  opacity: 1;
+}
+
+html.is-animating .transition-fade {
+  opacity: 0;
+}

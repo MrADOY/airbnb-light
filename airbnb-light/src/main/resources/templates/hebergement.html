@@ -10,24 +10,30 @@ layout:decorate="~{template.html}">
       <div class="row">
         <div class="col-md-12">
           <h1 class="text-center">Infos sur l'hébergement</h1>
-          <div class="card">
-            <img class="card-img-top" th:src="${hebergement.img}" alt="Card image cap">
+          <div data-count="1" class="card card-product">
+            <div class="card-header card-header-image animated" data-header-animation="true">
+              <img class="img" th:src="${hebergement.img}">
+            </div>
             <div class="card-body">
-              <h4 class="card-title text-center" th:text="${hebergement.typeHebergement}"></h4>
-              <h6 class="card-subtitle mb-2 text-muted text-center" th:text="${'Bien proposé par ' + hebergement.proprietaire.firstName + ' ' + hebergement.proprietaire.lastName}"></h6>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item pl-4">Nombre de places : <span th:text="${hebergement.nbPlace}"></span></li>
-                <li class="list-group-item pl-4" th:if="${hebergement.prixJour}">Prix / Jour : <span th:text="${hebergement.prixJour}"></span></li>
-                <li class="list-group-item pl-4" th:if="${hebergement.prixPers}">Prix / Personne : <span th:text="${hebergement.prixPers}"></span></li>
-              </ul>
-              <div th:switch="${hebergement.available}">
-                <a th:case="true" class="btn btn-success mt-3 ml-4" th:href="@{/reservation/reserver(id_hebergement=${hebergement.id})}">Réserver ce bien</a>
+              <div class="card-actions text-center">
+                <a th:if="${hebergement.available}" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="" data-original-title="Réserver"  th:href="@{/reservation/reserver(id_hebergement=${hebergement.id})}">
+                  <i class="material-icons">art_track</i>
+                  <div class="ripple-container"></div>
+                </a>
+              </div>
+              <h4 class="card-title" th:text="${hebergement.nom}"></h4>
+              <div class="card-description" th:text="${hebergement.description}"></div>
+            </div>
+            <div class="card-footer">
+              <div class="price" th:if="${hebergement.prixJour}"><span th:text="${hebergement.prixJour + ' € / jour'}"></span></div>
+              <div class="price" th:if="${hebergement.prixPers}"><span th:text="${hebergement.prixPers + ' € / jour'}"></span></div>
+              <div class="stats">
+                <p class="card-category"><i class="material-icons">place</i> <span th:text="${hebergement.ville + ', ' + hebergement.pays}"></span></p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-</body>
-</html>
+    </section>
+  </body>
+  </html>
