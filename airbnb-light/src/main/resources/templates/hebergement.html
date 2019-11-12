@@ -17,7 +17,8 @@ layout:decorate="~{template.html}">
             <div class="card-body">
               <div class="card-actions text-center">
                 <a th:if="${hebergement.available}" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="" data-original-title="Réserver"  th:href="@{/reservation/reserver(id_hebergement=${hebergement.id})}">
-                  <i class="material-icons">art_track</i>
+                  <i class="material-icons">home</i>
+                  Réserver
                   <div class="ripple-container"></div>
                 </a>
               </div>
@@ -27,6 +28,13 @@ layout:decorate="~{template.html}">
             <div class="card-footer">
               <div class="price" th:if="${hebergement.prixJour}"><span th:text="${hebergement.prixJour + ' € / jour'}"></span></div>
               <div class="price" th:if="${hebergement.prixPers}"><span th:text="${hebergement.prixPers + ' € / jour'}"></span></div>
+              <div class="reservation">
+                <a th:if="${hebergement.available}" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="" data-original-title="Réserver"  th:href="@{/reservation/reserver(id_hebergement=${hebergement.id})}">
+                  <i class="material-icons">home</i>
+                  Réserver
+                  <div class="ripple-container"></div>
+                </a>
+              </div>
               <div class="stats">
                 <p class="card-category"><i class="material-icons">place</i> <span th:text="${hebergement.ville + ', ' + hebergement.pays}"></span></p>
               </div>

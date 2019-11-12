@@ -2,17 +2,24 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 layout:decorate="~{template.html}">
 <head>
-  <title>AirBnb Home</title>
+  <title>Accueil</title>
 </head>
 <body>
   <section layout:fragment="body">
     <div class="container">
       <div class="row">
-        <div class="col-12">
-          <h1>Bienvenue sur AirBnb Home</h1>
+        <div class="col-md-12">
+          <h1 class="text-center">Bienvenue sur AirBnb</h1>
+          <a class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="" data-original-title="Voir les locations disponibles"  th:href="@{/reservation}">
+            <i class="material-icons">art_track</i>
+            <div class="ripple-container"></div>
+          </a>
+          <a class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="" data-original-title="Voir les locations disponibles"  th:href="@{/user}">
+            <i class="material-icons">art_track</i>
+            <div class="ripple-container"></div>
+          </a>
         </div>
       </div>
-    </div>
-  </section>
-</body>
-</html>
+    </section>
+  </body>
+  </html>

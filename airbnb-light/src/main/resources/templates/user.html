@@ -10,30 +10,13 @@ layout:decorate="~{template.html}">
       <div class="row">
         <div class="col-md-12">
           <h1 class="text-center">Votre compte</h1>
-          <a th:text="${username}"></a>
-          <a th:text="${nom}"></a>
-          <a th:text="${prenom}"></a>
-
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th>id</th>
-                <th>Type d'hébergement</th>
-                <th>Nombre de places</th>
-                <th>Disponibilité</th>
-                <th>Propriétaire</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="annonce : ${annonces}" th:classappend="${!annonce.available ? 'table-warning':''}">
-                <td><a th:text="${annonce.id}"></a></td>
-                <td><a th:text="${annonce.typeHebergement}"></a></td>
-                <td><a th:text="${annonce.nbPlace}"></a></td>
-                <td><a th:text="${annonce.available}"></a></td>
-                <td><a th:text="${annonce.proprietaire.id}"></a></td>
-              </tr>
-            </tbody>
-          </table>
+          <h2>Vos informations</h2>
+          <h3>Nom</h3>
+          <span th:text="${nom}"></span>
+          <h3>Prénom</h3>
+          <span th:text="${prenom}"></span>
+          <h3>Email</h3>
+          <span th:text="${username}"></span>
         </div>
       </div>
     </div>
