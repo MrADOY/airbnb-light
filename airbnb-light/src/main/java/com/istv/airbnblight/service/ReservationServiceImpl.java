@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
@@ -46,5 +48,24 @@ public class ReservationServiceImpl implements ReservationService {
         res.setEnd(registration.getEnd());
         res.setHebergement(her);
         return reservationRepository.save(res);
+    }
+
+    @Override
+    public Reservation save(Reservation registration){
+        return reservationRepository.save(registration);
+    }
+
+    @Override
+    public Reservation findById(Long idReservation){
+        Optional<Reservation> reservation = reservationRepository.findById(idReservation);
+
+        if(reservation.isPresent()){
+            reservation.get().setConfirmee(true);
+            reservationRepository.save(reservation.get());
+            return reservation.get();
+        } else {
+            return null;
+        }
+
     }
 }

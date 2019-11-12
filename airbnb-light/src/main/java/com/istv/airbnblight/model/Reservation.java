@@ -27,6 +27,15 @@ public class Reservation {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date end;
 
+    private boolean isConfirmee;
+
+    public boolean isConfirmee() {
+        return isConfirmee;
+    }
+
+    public void setConfirmee(boolean confirmee) {
+        isConfirmee = confirmee;
+    }
 
     public Hebergement getHebergement() {
         return hebergement;

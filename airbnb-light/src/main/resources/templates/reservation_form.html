@@ -12,14 +12,6 @@ layout:decorate="~{template.html}">
           <h1 class="text-center">Demande de location</h1>
           <form th:action="@{/reservation}" th:object="${reservation}" method="post">
             <input name="idHebergement" type="hidden" th:value="${hebergement.id}" />
-            <div class="form-group">
-              <label for="firstName" class="control-label">Prénom</label>
-              <input id="firstName" type="text" class="form-control" th:field="*{firstName}" />
-            </div>
-            <div class="form-group">
-              <label for="lastName" class="control-label">Nom</label>
-              <input id="lastName" type="text" class="form-control" th:field="*{lastName}"/>
-            </div>
             <div class="form-group" th:classappend="${#fields.hasErrors('start')}? 'has-error':''">
               <label for="start" class="control-label">Date de début</label>
               <input id="start" type="date" class="form-control" th:field="*{start}"/>
