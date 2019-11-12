@@ -10,13 +10,25 @@ layout:decorate="~{template.html}">
       <div class="row">
         <div class="col-md-12">
           <h1 class="text-center">Votre compte</h1>
-          <h2>Vos informations</h2>
-          <h3>Nom</h3>
-          <span th:text="${nom}"></span>
-          <h3>Prénom</h3>
-          <span th:text="${prenom}"></span>
-          <h3>Email</h3>
-          <span th:text="${username}"></span>
+          <div class="card card-profile ml-auto mr-auto" style="max-width: 600px">
+            <div class="card-header card-header-image">
+              <a href="#pablo">
+                <img class="img" src="https://images.unsplash.com/photo-1492447273231-0f8fecec1e3a?auto=format&fit=crop&h=800&w=800&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D">
+              </a>
+            </div>
+            <div class="card-body ">
+              <h4 class="card-title" th:text="${nom + ' ' + prenom}"></h4>
+              <h6 class="card-category text-gray" th:text="${username}"></h6>
+            </div>
+            <div class="card-footer justify-content-center">
+              <a th:href="@{/logout}" class="btn btn-info btn-fab btn-fab-mini btn-round">
+                <i class="material-icons">close</i>
+              </a>
+              <a th:href="@{/logout}" class="btn btn-primary btn-fab btn-fab-mini btn-round">
+                <i class="material-icons">edit</i>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
