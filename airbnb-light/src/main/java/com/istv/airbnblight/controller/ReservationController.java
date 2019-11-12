@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class ReservationController {
@@ -43,7 +44,14 @@ public class ReservationController {
     }
 
     @GetMapping("/reservation/accepter-reservation")
-    public String registerUserAccount(Model model, @RequestParam(name = "id_reservation") long id_reservation){
+    public String registerUserAccount(Model model){
+        List<Reservation> reservations = reservationService.findByIsConfirmeeTrue();
+        model.addAttribute("reservationsAValider", reservations);
+        return "reservation_form";
+    }
+
+    @GetMapping("/reservation/lister-reservation-a-valider")
+    public String listerReservationAValider(Model model, @RequestParam(name = "id_reservation") long id_reservation){
         Reservation reservation = reservationService.findById(id_reservation);
 
         if(reservation != null && !reservation.isConfirmee()){
@@ -54,6 +62,7 @@ public class ReservationController {
         model.addAttribute("hebergement", reservation);
         return "reservation_form";
     }
+
 
 
 }

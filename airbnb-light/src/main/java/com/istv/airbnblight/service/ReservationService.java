@@ -17,4 +17,6 @@ public interface ReservationService {
 
     public List<Reservation> findByIsConfirmeeTrue();
 
+    List<Reservation> getReservationsAValider();
+
 }

@@ -2,6 +2,7 @@ package com.istv.airbnblight.controller;
 
 import com.istv.airbnblight.config.UtilisateurPrincipal;
 import com.istv.airbnblight.service.HebergementService;
+import com.istv.airbnblight.service.ReservationService;
 import com.istv.airbnblight.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,9 @@ public class IndexController {
 
     @Autowired
     private HebergementService herbergementService;
+
+    @Autowired
+    private ReservationService reservationService;
 
     @GetMapping("/")
     public String root() {
@@ -54,7 +58,8 @@ public class IndexController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         model.addAttribute("annonces", herbergementService.findAll());
-
+        reservationService.findByIsConfirmeeTrue();
+        model.addAttribute("reservationAValider", reservationService.getReservationsAValider());
 
         return "reservation";
     }
