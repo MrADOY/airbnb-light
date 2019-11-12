@@ -3,22 +3,27 @@ package com.istv.airbnblight.service;
 import com.istv.airbnblight.config.UtilisateurPrincipal;
 import com.istv.airbnblight.model.Hebergement;
 import com.istv.airbnblight.model.Reservation;
-import com.istv.airbnblight.model.odt.EnregistrementUtilisateurOdt;
-import com.istv.airbnblight.model.Role;
-import com.istv.airbnblight.model.Utilisateur;
 import com.istv.airbnblight.model.odt.ReservationServiceOdt;
 import com.istv.airbnblight.repository.HebergementRepository;
 import com.istv.airbnblight.repository.ReservationRepository;
 import com.istv.airbnblight.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ReservationServiceImpl implements ReservationService {
+
+    public List<Reservation> reservationsAValider;
 
     @Autowired
     ReservationRepository reservationRepository;
@@ -72,7 +77,19 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public List<Reservation> findByIsConfirmeeTrue(){
-        List<Reservation> reservations = reservationRepository.findByIsConfirmeeFalse();
-        return null;
+
+        if(reservationsAValider == null){
+            reservationsAValider = new ArrayList<>();
+        }
+
+        reservationsAValider = reservationRepository.findByIsConfirmeeFalse();
+
+
+        return reservationsAValider;
+
+    }
+
+    public List<Reservation> getReservationsAValider() {
+        return reservationsAValider;
     }
 }
