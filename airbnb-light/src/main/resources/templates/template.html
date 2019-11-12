@@ -49,10 +49,14 @@
             <li class="nav-item dropdown">
                 <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">notifications</i>
+<<<<<<< HEAD
+                  <span class="notification">5</span>
+=======
                   <span class="notification" th:if="${reservationAValider}" th:text="${#lists.size(reservationAValider)}"></span>
                   <!-- <p class="d-lg-none d-md-block">
                     Some Actions
                   </p> -->
+>>>>>>> 487c588008c94b9b2ce21cea2b9a8a9aa761d523
                 </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <a th:each="reser : ${reservationAValider}" th:text="${reser.id}" class="dropdown-item" href="#"></a>
