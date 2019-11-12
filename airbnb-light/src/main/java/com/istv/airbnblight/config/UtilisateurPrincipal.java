@@ -23,10 +23,6 @@ public class UtilisateurPrincipal implements UserDetails {
     }
 
     public static UtilisateurPrincipal create(Utilisateur user) {
-        //List<GrantedAuthority> authorities = user.getRoles().stream().map(role ->
-        //        new SimpleGrantedAuthority(role.getName())
-        //).collect(Collectors.toList());
-
         return new UtilisateurPrincipal(
                 user.getId(),
                 user.getFirstName(),

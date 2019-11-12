@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -67,5 +68,11 @@ public class ReservationServiceImpl implements ReservationService {
             return null;
         }
 
+    }
+
+    @Override
+    public List<Reservation> findByIsConfirmeeTrue(){
+        List<Reservation> reservations = reservationRepository.findByIsConfirmeeFalse();
+        return null;
     }
 }
