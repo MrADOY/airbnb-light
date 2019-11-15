@@ -51,8 +51,14 @@ layout:decorate="~{template.html}">
 
 <script type="text/javascript">
 $(document).ready( function () {
-  $('.datatable').DataTable({
+  var table = $('.datatable').DataTable({
     dom: 'Blfrtip',
+    columns: [
+      null,
+      null,
+      null,
+      { "searchable": false, "orderable": false },
+    ],
     buttons: [
       {
         text: 'Ajouter un bien',
