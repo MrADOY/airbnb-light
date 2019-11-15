@@ -16,6 +16,7 @@ import javax.validation.Valid;
 
 @Controller
 public class HebergementController {
+
     @Autowired
     private HebergementService hebergementService;
 
@@ -30,5 +31,11 @@ public class HebergementController {
 
       model.addAttribute("hebergement", hebergement);
       return "hebergement";
+     }
+
+     @GetMapping("hebergements-user")
+    public String listerHebergement(Model model){
+         model.addAttribute("hebergements", hebergementService.findHebergementUtilisateur());
+         return "hebergements-user";
      }
 }

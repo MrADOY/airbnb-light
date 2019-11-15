@@ -38,8 +38,8 @@
             <li sec:authorize="isAuthenticated()" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/user' ? 'active':''}">
               <a class="nav-link" th:href="@{/user}">Votre compte</a>
             </li>
-            <li sec:authorize="isAuthenticated()" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/hebergements' ? 'active':''}">
-              <a class="nav-link" th:href="@{/hebergements}">Vos hebergements</a>
+            <li sec:authorize="isAuthenticated()" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/hebergements-user' ? 'active':''}">
+              <a class="nav-link" th:href="@{/hebergements-user}">Vos hebergements</a>
             </li>
             <li sec:authorize="isAuthenticated()" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/reservations-users' ? 'active':''}">
               <a class="nav-link" th:href="@{/reservations-users}">Vos Reservations</a>
