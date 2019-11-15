@@ -36,7 +36,7 @@ layout:decorate="~{template.html}">
                 </a>
               </div>
               <div class="stats">
-                <p class="card-category" th:if="${hebergement.ville and hebergement.pays}"><i class="material-icons">place</i> <span th:text="${hebergement.ville + ', ' + hebergement.pays}"></span></p>
+                <p class="card-category" th:if="${hebergement.ville} and ${hebergement.pays}"><i class="material-icons">place</i> <span th:text="${hebergement.ville + ', ' + hebergement.pays}"></span></p>
               </div>
             </div>
           </div>

@@ -46,60 +46,23 @@
             </li>
           </ul>
           <ul class="navbar-nav" sec:authorize="isAuthenticated()">
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" th:if="${reservationAValider} and ${#lists.size(reservationAValider) > 0}">
+
                 <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">notifications</i>
                   <span class="notification" th:if="${reservationAValider}" th:text="${#lists.size(reservationAValider)}"></span>
                 </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a th:each="reser : ${reservationAValider}" th:text="${reser.id}" class="dropdown-item" href="#"></a>
-              </div>
-              </li>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" th:if="${#lists.size(reservationAValider) > 0}">
+                  <a th:each="reser : ${reservationAValider}" th:text="${reser.id}" class="dropdown-item" href="#"></a>
+                </div>
+              
+            </li>
             <li class="nav-item dropdown">
               <a class="nav-link" href="" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="material-icons">person</i>
                 <!-- <p class="d-lg-none d-md-block">
-                  Votre compte
-                </p> -->
-                <div class="ripple-container"></div></a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                  <a class="dropdown-item" th:href="@{/user}">Votre profil<div class="ripple-container"><div class="ripple-decorator ripple-on ripple-out" style="left: 112px; top: 28px; background-color: rgb(255, 255, 255); transform: scale(18.75);"></div></div></a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" th:href="@{/logout}">Se déconnecter</a>
-                </div>
-              </li>
-            </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" th:href="@{/}">Airbnb Light</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarToggler">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li sec:authorize="!isAuthenticated()" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/registration' ? 'active':''}">
-            <a class="nav-link" th:href="@{/registration}">S'enregistrer</a>
-          </li>
-          <li sec:authorize="!isAuthenticated()" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active':''}">
-            <a class="nav-link" th:href="@{/login}">Se connecter</a>
-          </li>
-          <li sec:authorize="isAuthenticated()" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/logout' ? 'active':''}">
-            <a class="nav-link" th:href="@{/reservation}">Locations</a>
-          </li>
-          <li sec:authorize="isAuthenticated()" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/logout' ? 'active':''}">
-            <a class="nav-link" th:href="@{/user}">Votre compte</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav" sec:authorize="isAuthenticated()">
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="material-icons">person</i>
-              <p class="d-lg-none d-md-block">
                 Votre compte
-              </p>
+              </p> -->
               <div class="ripple-container"></div></a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
                 <a class="dropdown-item" th:href="@{/user}">Votre profil<div class="ripple-container"><div class="ripple-decorator ripple-on ripple-out" style="left: 112px; top: 28px; background-color: rgb(255, 255, 255); transform: scale(18.75);"></div></div></a>
@@ -109,25 +72,64 @@
             </li>
           </ul>
         </div>
-      </nav> -->
-    </header>
-
-    <div class="main_content">
-      <section layout:fragment="body">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <h1>Bienvenue sur AirBnb</h1>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <footer class="footer py-4 mt-5 bg-dark text-center text-white-50" layout:fragment="footer">
-      <div class="container">
-        Copyright © AirBnb Corp 2019
       </div>
-    </footer>
-  </body>
-  </html>
+    </nav>
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{/}">Airbnb Light</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarToggler">
+  <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+  <li sec:authorize="!isAuthenticated()" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/registration' ? 'active':''}">
+  <a class="nav-link" th:href="@{/registration}">S'enregistrer</a>
+</li>
+<li sec:authorize="!isAuthenticated()" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active':''}">
+<a class="nav-link" th:href="@{/login}">Se connecter</a>
+</li>
+<li sec:authorize="isAuthenticated()" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/logout' ? 'active':''}">
+<a class="nav-link" th:href="@{/reservation}">Locations</a>
+</li>
+<li sec:authorize="isAuthenticated()" class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/logout' ? 'active':''}">
+<a class="nav-link" th:href="@{/user}">Votre compte</a>
+</li>
+</ul>
+<ul class="navbar-nav" sec:authorize="isAuthenticated()">
+<li class="nav-item dropdown">
+<a class="nav-link" href="" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<i class="material-icons">person</i>
+<p class="d-lg-none d-md-block">
+Votre compte
+</p>
+<div class="ripple-container"></div></a>
+<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+<a class="dropdown-item" th:href="@{/user}">Votre profil<div class="ripple-container"><div class="ripple-decorator ripple-on ripple-out" style="left: 112px; top: 28px; background-color: rgb(255, 255, 255); transform: scale(18.75);"></div></div></a>
+<div class="dropdown-divider"></div>
+<a class="dropdown-item" th:href="@{/logout}">Se déconnecter</a>
+</div>
+</li>
+</ul>
+</div>
+</nav> -->
+</header>
+
+<div class="main_content">
+  <section layout:fragment="body">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1>Bienvenue sur AirBnb</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer py-4 mt-5 bg-dark text-center text-white-50" layout:fragment="footer">
+  <div class="container">
+    Copyright © AirBnb Corp 2019
+  </div>
+</footer>
+</body>
+</html>
