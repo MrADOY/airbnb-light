@@ -21,38 +21,50 @@ import java.util.stream.Collectors;
 @Service
 public class UtilisateurServiceImpl implements UserDetailsService, UtilisateurService {
 
-    @Autowired
-    private UtilisateurRepository utilisateurRepository;
+  @Autowired
+  private UtilisateurRepository utilisateurRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+  @Autowired
+  private BCryptPasswordEncoder passwordEncoder;
 
-    @Override
-    public UserDetails loadUserByUsername(String usernameOrEmail)
-            throws UsernameNotFoundException {
-        Utilisateur user = utilisateurRepository.findByEmail(usernameOrEmail);
-        return UtilisateurPrincipal.create(user);
-    }
+  @Override
+  public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+    Utilisateur user = utilisateurRepository.findByEmail(usernameOrEmail);
+    return UtilisateurPrincipal.create(user);
+  }
 
-    @Override
-    public Utilisateur findByEmail(String email){
-        return utilisateurRepository.findByEmail(email);
-    }
+  @Override
+  public Utilisateur findByEmail(String email){
+    return utilisateurRepository.findByEmail(email);
+  }
 
-    @Override
-    public Utilisateur save(EnregistrementUtilisateurOdt registration){
-        Utilisateur utilisateur = new Utilisateur();
-        utilisateur.setFirstName(registration.getFirstName());
-        utilisateur.setLastName(registration.getLastName());
-        utilisateur.setEmail(registration.getEmail());
-        utilisateur.setPassword(passwordEncoder.encode(registration.getPassword()));
-        utilisateur.setRoles(Arrays.asList(new Role("ROLE_USER")));
-        return utilisateurRepository.save(utilisateur);
-    }
+  public Utilisateur findById(long id){
+      return utilisateurRepository.findById(id).get();
+  }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toList());
-    }
+  @Override
+  public Utilisateur save(EnregistrementUtilisateurOdt registration){
+    Utilisateur utilisateur = new Utilisateur();
+    utilisateur.setFirstName(registration.getFirstName());
+    utilisateur.setLastName(registration.getLastName());
+    utilisateur.setEmail(registration.getEmail());
+    utilisateur.setPassword(passwordEncoder.encode(registration.getPassword()));
+    utilisateur.setRoles(Arrays.asList(new Role("ROLE_USER")));
+    return utilisateurRepository.save(utilisateur);
+  }
+
+  @Override
+  public Utilisateur update(String email, EnregistrementUtilisateurOdt registration){
+    Utilisateur utilisateur = utilisateurRepository.findByEmail(email);
+    utilisateur.setFirstName(registration.getFirstName());
+    utilisateur.setLastName(registration.getLastName());
+    utilisateur.setEmail(registration.getEmail());
+    return utilisateurRepository.save(utilisateur);
+  }
+
+  private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
+    return roles.stream()
+    .map(role -> new SimpleGrantedAuthority(role.getName()))
+    .collect(Collectors.toList());
+  }
 }

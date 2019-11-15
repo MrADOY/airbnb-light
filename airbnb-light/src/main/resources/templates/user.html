@@ -17,14 +17,14 @@ layout:decorate="~{template.html}">
               </a>
             </div>
             <div class="card-body ">
-              <h4 class="card-title" th:text="${nom + ' ' + prenom}"></h4>
-              <h6 class="card-category text-gray" th:text="${username}"></h6>
+              <h4 class="card-title" th:text="${utilisateur.lastName + ' ' + utilisateur.firstName}"></h4>
+              <h6 class="card-category text-gray" th:text="${utilisateur.email}"></h6>
             </div>
             <div class="card-footer justify-content-center">
               <!-- <a th:href="@{/logout}" class="btn btn-info btn-fab btn-fab-mini btn-round">
                 <i class="material-icons">close</i>
               </a> -->
-              <a th:href="@{/logout}" class="btn btn-primary btn-fab btn-fab-mini btn-round">
+              <a th:href="@{/user/edit}" class="btn btn-primary btn-fab btn-fab-mini btn-round">
                 <i class="material-icons">edit</i>
               </a>
             </div>

@@ -2,36 +2,117 @@ package com.istv.airbnblight.model.odt;
 
 public class HebergementServiceOdt {
 
-    private long idHebergement;
+    private long proprietaireId;
+    private String nom;
+    private String adresse;
+    private String cp;
+    private String ville;
+    private String pays;
+    private String description;
+    private String image;
+    private String nbPlace;
+    private String prixJour;
+    private String prixPers;
+    private String typeHebergement;
 
-    private long start;
 
-    private long end;
 
     public HebergementServiceOdt() {
     }
 
-    public long getIdHebergement() {
-        return idHebergement;
+    public long getProprietaireId() {
+        return proprietaireId;
     }
 
-    public void setIdHebergement(long idHebergement) {
-        this.idHebergement = idHebergement;
+    public void setProprietaireId(long proprietaireId) {
+        this.proprietaireId = proprietaireId;
     }
 
-    public long getStart() {
-        return start;
+    public String getNom() {
+        return nom;
     }
 
-    public void setStart(long start) {
-        this.start = start;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public long getEnd() {
-        return end;
+    public String getAdresse() {
+        return adresse;
     }
 
-    public void setEnd(long end) {
-        this.end = end;
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getCp() {
+        return cp;
+    }
+
+    public void setCp(String cp) {
+        this.cp = cp;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public String getPays() {
+        return pays;
+    }
+
+    public void setPays(String pays) {
+        this.pays = pays;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getNbPlace() {
+        return nbPlace;
+    }
+
+    public void setNbPlace(String nbPlace) {
+        this.nbPlace = nbPlace;
+    }
+
+    public String getPrixPers() {
+        return prixPers;
+    }
+
+    public void setPrixPers(String prixPers) {
+        this.prixPers = prixPers;
+    }
+
+    public String getPrixJour() {
+        return prixJour;
+    }
+
+    public void setPrixJour(String prixJour) {
+        this.prixJour = prixJour;
+    }
+
+    public String getType() {
+        return typeHebergement;
+    }
+
+    public void setTypeHebergement(String typeHebergement) {
+        this.typeHebergement = typeHebergement;
     }
 }

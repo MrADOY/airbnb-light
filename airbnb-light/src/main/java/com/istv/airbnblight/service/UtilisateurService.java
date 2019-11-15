@@ -5,5 +5,7 @@ import com.istv.airbnblight.model.Utilisateur;
 
 public interface UtilisateurService {
     public Utilisateur findByEmail(String email);
+    public Utilisateur findById(long id);
     public Utilisateur save(EnregistrementUtilisateurOdt registration);
+    public Utilisateur update(String email, EnregistrementUtilisateurOdt registration);
 }

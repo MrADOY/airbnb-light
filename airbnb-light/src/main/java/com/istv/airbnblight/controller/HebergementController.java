@@ -17,25 +17,52 @@ import javax.validation.Valid;
 @Controller
 public class HebergementController {
 
-    @Autowired
-    private HebergementService hebergementService;
+  @Autowired
+  private HebergementService hebergementService;
 
-    @ModelAttribute("hebergement")
-    public HebergementServiceOdt hebergementDto() {
-        return new HebergementServiceOdt();
-    }
+  @ModelAttribute("hebergement")
+  public HebergementServiceOdt hebergementDto() {
+    return new HebergementServiceOdt();
+  }
 
-    @GetMapping("/hebergement/{id}/show")
-    public String showHebergement(@PathVariable long id, Model model) {
-      Hebergement hebergement = hebergementService.findById(id);
+  @GetMapping("/hebergement/{id}/show")
+  public String showHebergement(@PathVariable long id, Model model) {
+    Hebergement hebergement = hebergementService.findById(id);
 
-      model.addAttribute("hebergement", hebergement);
-      return "hebergement";
-     }
+    model.addAttribute("hebergement", hebergement);
+    return "hebergement";
+  }
 
-     @GetMapping("hebergements-user")
-    public String listerHebergement(Model model){
-         model.addAttribute("hebergements", hebergementService.findHebergementUtilisateur());
-         return "hebergements-user";
-     }
+  @GetMapping("/hebergement/{id}/edit")
+  public String editHebergement(@PathVariable long id, Model model) {
+    Hebergement hebergement = hebergementService.findById(id);
+    model.addAttribute("hebergement", hebergement);
+    return "hebergement_form";
+  }
+
+  @GetMapping("/hebergement/create")
+  public String createHebergement(Model model) {
+    return "hebergement_form";
+  }
+
+  @PostMapping("/hebergement/create")
+  public String saveHebergement(@PathVariable long id, Model model) {
+    Hebergement hebergement = hebergementService.findById(id);
+
+    model.addAttribute("hebergement", hebergement);
+    return "redirect:/hebergements-user";
+  }
+
+  @PostMapping("/hebergement")
+  public String listerReservation(@ModelAttribute("hebergement") @Valid HebergementServiceOdt hebOdt,
+                                    BindingResult result){
+      Hebergement existing = hebergementService.save(hebOdt);
+      return "redirect:/hebergement?success";
+  }
+
+  @GetMapping("hebergements-user")
+  public String listerHebergement(Model model){
+    model.addAttribute("hebergements", hebergementService.findHebergementUtilisateur());
+    return "hebergements-user";
+  }
 }

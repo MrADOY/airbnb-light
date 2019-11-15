@@ -28,6 +28,15 @@ public class ReservationController {
         return new ReservationServiceOdt();
     }
 
+    @GetMapping("/reservation")
+    public String reservationIndex(Model model) {
+        model.addAttribute("annonces", hebergementService.findAll());
+        reservationService.findByIsConfirmeeTrue();
+        model.addAttribute("reservationAValider", reservationService.getReservationsAValider());
+
+        return "reservation";
+    }
+
     @PostMapping("/reservation")
     public String listerReservation(@ModelAttribute("reservation") @Valid ReservationServiceOdt resOdt,
                                       BindingResult result){
