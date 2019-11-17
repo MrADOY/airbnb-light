@@ -45,19 +45,11 @@ public class HebergementController {
     return "hebergement_form";
   }
 
-  @PostMapping("/hebergement/create")
-  public String saveHebergement(@PathVariable long id, Model model) {
-    Hebergement hebergement = hebergementService.findById(id);
-
-    model.addAttribute("hebergement", hebergement);
-    return "redirect:/hebergements-user";
-  }
-
   @PostMapping("/hebergement")
-  public String listerReservation(@ModelAttribute("hebergement") @Valid HebergementServiceOdt hebOdt,
-                                    BindingResult result){
+  public String saveHebergement(@ModelAttribute("reservation") @Valid HebergementServiceOdt hebOdt,
+                                    BindingResult result) {
       Hebergement existing = hebergementService.save(hebOdt);
-      return "redirect:/hebergement?success";
+      return "redirect:/hebergements-user?success";
   }
 
   @GetMapping("hebergements-user")

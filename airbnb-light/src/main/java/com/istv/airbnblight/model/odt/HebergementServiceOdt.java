@@ -108,7 +108,7 @@ public class HebergementServiceOdt {
         this.prixJour = prixJour;
     }
 
-    public String getType() {
+    public String getTypeHebergement() {
         return typeHebergement;
     }
 
