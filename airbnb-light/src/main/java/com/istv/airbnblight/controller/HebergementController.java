@@ -36,6 +36,7 @@ public class HebergementController {
   @GetMapping("/hebergement/{id}/edit")
   public String editHebergement(@PathVariable long id, Model model) {
     Hebergement hebergement = hebergementService.findById(id);
+    model.addAttribute("id_hebergement", id);
     model.addAttribute("hebergement", hebergement);
     return "hebergement_form";
   }
@@ -46,7 +47,7 @@ public class HebergementController {
   }
 
   @PostMapping("/hebergement")
-  public String saveHebergement(@ModelAttribute("reservation") @Valid HebergementServiceOdt hebOdt,
+  public String saveHebergement(@ModelAttribute("hebergement") @Valid HebergementServiceOdt hebOdt,
                                     BindingResult result) {
       Hebergement existing = hebergementService.save(hebOdt);
       return "redirect:/hebergements-user?success";

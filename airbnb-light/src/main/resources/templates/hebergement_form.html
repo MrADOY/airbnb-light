@@ -5,7 +5,12 @@ layout:decorate="~{template.html}">
   <title>Ajouter un bien</title>
   <script type="text/javascript">
   jQuery(function ($) {
-    var $inputs = $('input[id=prixJour],input[name=prixPers]');
+    var $inputs = $('input[id=prixJour],input[id=prixPers]');
+    $inputs.each(function(){
+      if($(this).val().length){
+        $inputs.not(this).prop('required', !$(this).val().length)
+      }
+    });
     $inputs.on('input', function () {
       // Set the required property of the other input to false if this input is not empty.
       $inputs.not(this).prop('required', !$(this).val().length);
@@ -20,6 +25,7 @@ layout:decorate="~{template.html}">
         <div class="col-md-12">
           <h1 class="text-center">Ajouter un bien</h1>
           <form th:action="@{/hebergement}" th:object="${hebergement}" method="post">
+            <input type="hidden" name="id" th:field="*{id}">
             <h2 class="text-center">Adresse</h2>
             <div class="form-group" th:classappend="${#fields.hasErrors('adresse')}? 'has-error':''">
               <label for="adresse" class="control-label">Adresse</label>
@@ -64,47 +70,52 @@ layout:decorate="~{template.html}">
             <div class="form-group" th:classappend="${#fields.hasErrors('typeHebergement')}? 'has-error':''">
               <label for="typeHebergement" class="control-label">Type d'hébergement</label>
               <!-- <select id="typeHebergement" name="typeHebergement" class="form-control">
-                <option value="MAISON">Maison</option>
-                <option value="APPARTEMENT">Appartement</option>
-              </select> -->
-              <input id="typeHebergement" class="form-control" th:field="*{typeHebergement}"/>
-              <p class="error-message" th:each="error: ${#fields.errors('typeHebergement')}" th:text="${error}">Erreur de validation</p>
-            </div>
-            <div class="form-group" th:classappend="${#fields.hasErrors('image')}? 'has-error':''">
-              <label for="image" class="control-label">URL de l'image principale</label>
-              <input id="image" class="form-control" th:field="*{image}"/>
-              <p class="error-message" th:each="error: ${#fields.errors('image')}" th:text="${error}">Erreur de validation</p>
-            </div>
-            <div class="form-group" th:classappend="${#fields.hasErrors('nbPlace')}? 'has-error':''">
-              <label for="nbPlace" class="control-label">Nombre de place</label>
-              <input id="nbPlace" class="form-control" th:field="*{nbPlace}" type="number" min="0" step="1" max="500" required/>
-              <p class="error-message" th:each="error: ${#fields.errors('nbPlace')}" th:text="${error}">Erreur de validation</p>
-            </div>
-
-            <h2 class="text-center">Prix</h2>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group" th:classappend="${#fields.hasErrors('prixPers')}? 'has-error':''">
-                  <label for="prixPers" class="control-label">Prix / Personne</label>
-                  <input id="prixPers" class="form-control" th:field="*{prixPers}" type="number" min="0" step="0.01" required/>
-                  <p class="error-message" th:each="error: ${#fields.errors('prixPers')}" th:text="${error}">Erreur de validation</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group" th:classappend="${#fields.hasErrors('prixJour')}? 'has-error':''">
-                  <label for="prixJour" class="control-label">Prix / Jour</label>
-                  <input id="prixJour" class="form-control" th:field="*{prixJour}" type="number" min="0" step="0.01" required/>
-                  <p class="error-message" th:each="error: ${#fields.errors('prixJour')}" th:text="${error}">Erreur de validation</p>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-success">Enregistrer</button>
-            </div>
-          </form>
+              <option value="MAISON">Maison</option>
+              <option value="APPARTEMENT">Appartement</option>
+            </select> -->
+            <!-- <select th:field="*{typeHebergement}">
+            <option th:each="type : ${allTypes}"
+            th:value="${type}"
+            th:text="#{${'seedstarter.type.' + type}}">Wireframe</option>
+          </select> -->
+          <input id="typeHebergement" class="form-control" th:field="*{typeHebergement}"/>
+          <p class="error-message" th:each="error: ${#fields.errors('typeHebergement')}" th:text="${error}">Erreur de validation</p>
         </div>
-      </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('image')}? 'has-error':''">
+          <label for="image" class="control-label">URL de l'image principale</label>
+          <input id="image" class="form-control" th:field="*{image}"/>
+          <p class="error-message" th:each="error: ${#fields.errors('image')}" th:text="${error}">Erreur de validation</p>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('nbPlace')}? 'has-error':''">
+          <label for="nbPlace" class="control-label">Nombre de place</label>
+          <input id="nbPlace" class="form-control" th:field="*{nbPlace}" type="number" min="0" step="1" max="500" required/>
+          <p class="error-message" th:each="error: ${#fields.errors('nbPlace')}" th:text="${error}">Erreur de validation</p>
+        </div>
+
+        <h2 class="text-center">Prix</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group" th:classappend="${#fields.hasErrors('prixPers')}? 'has-error':''">
+              <label for="prixPers" class="control-label">Prix / Personne</label>
+              <input id="prixPers" class="form-control" th:field="*{prixPers}" type="number" min="0" step="0.01" required/>
+              <p class="error-message" th:each="error: ${#fields.errors('prixPers')}" th:text="${error}">Erreur de validation</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group" th:classappend="${#fields.hasErrors('prixJour')}? 'has-error':''">
+              <label for="prixJour" class="control-label">Prix / Jour</label>
+              <input id="prixJour" class="form-control" th:field="*{prixJour}" type="number" min="0" step="0.01" required/>
+              <p class="error-message" th:each="error: ${#fields.errors('prixJour')}" th:text="${error}">Erreur de validation</p>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Enregistrer</button>
+        </div>
+      </form>
     </div>
-  </section>
+  </div>
+</div>
+</section>
 </body>
 </html>

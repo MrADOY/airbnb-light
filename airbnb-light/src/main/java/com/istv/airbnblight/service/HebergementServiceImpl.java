@@ -43,8 +43,40 @@ public class HebergementServiceImpl implements HebergementService {
         }
 
         Hebergement heb = new Hebergement();
+        if (hebergement.getId() != null) {
+          heb = hebergementRepository.findById(hebergement.getId()).get();
+        }
         heb.setProprietaire(utilisateurRepository.findById(idProprio).get());
-
+        if (hebergement.getTypeHebergement() != "") {
+          heb.setTypeHebergement(hebergement.getTypeHebergement());
+        }
+        heb.setNbPlace(hebergement.getNbPlace());
+        if (hebergement.getDescription() != "") {
+          heb.setDescription(hebergement.getDescription());
+        }
+        if (hebergement.getAdresse() != "") {
+          heb.setAdresse(hebergement.getAdresse());
+        }
+        if (hebergement.getVille() != "") {
+          heb.setVille(hebergement.getVille());
+        }
+        if (hebergement.getPays() != "") {
+          heb.setPays(hebergement.getPays());
+        }
+        if (hebergement.getCp() != "") {
+          heb.setCp(hebergement.getCp());
+        }
+        if(hebergement.getPrixJour() != "") {
+          heb.setPrixJour(hebergement.getPrixJour());
+        }
+        if (hebergement.getPrixPers() != "") {
+          heb.setPrixPers(hebergement.getPrixPers());
+        }
+        if (hebergement.getImage() != "") {
+          heb.setImage(hebergement.getImage());
+        }
+        heb.setNom(hebergement.getNom());
+        heb.setAvailable(true);
         return hebergementRepository.save(heb);
     }
 

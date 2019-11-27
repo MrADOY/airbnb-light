@@ -11,11 +11,11 @@ layout:decorate="~{template.html}">
         <div class="col-md-12">
           <h1 class="text-center">Infos sur l'hébergement</h1>
           <div data-count="1" class="card card-product">
-            <div th:if="${hebergement.img}" class="card-header card-header-image animated" data-header-animation="true">
-              <img class="img" th:src="${hebergement.img}">
+            <div th:if="${hebergement.image}" class="card-header card-header-image animated" data-header-animation="false">
+              <image class="image" th:src="${hebergement.image}">
             </div>
             <div class="card-body">
-              <div th:if="${hebergement.img}" class="card-actions text-center">
+              <div th:if="${hebergement.image}" class="card-actions text-center">
                 <a th:if="${hebergement.available}" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="" data-original-title="Réserver"  th:href="@{/reservation/reserver(id_hebergement=${hebergement.id})}">
                   <i class="material-icons">home</i>
                   Réserver

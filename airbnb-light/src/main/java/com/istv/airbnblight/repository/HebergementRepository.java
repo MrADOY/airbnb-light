@@ -8,10 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
 @Repository
 public interface HebergementRepository extends CrudRepository<Hebergement, Long> {
-
-    List<Hebergement> findByProprietaireId(Long id);
-
+  List<Hebergement> findByProprietaireId(Long id);
 }

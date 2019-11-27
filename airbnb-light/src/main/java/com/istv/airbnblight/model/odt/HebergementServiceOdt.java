@@ -1,7 +1,7 @@
 package com.istv.airbnblight.model.odt;
 
 public class HebergementServiceOdt {
-
+    private Long id;
     private long proprietaireId;
     private String nom;
     private String adresse;
@@ -10,14 +10,20 @@ public class HebergementServiceOdt {
     private String pays;
     private String description;
     private String image;
-    private String nbPlace;
+    private Integer nbPlace;
     private String prixJour;
     private String prixPers;
     private String typeHebergement;
 
-
-
     public HebergementServiceOdt() {
+    };
+
+    public Long getId() {
+      return id;
+    }
+
+    public void setId(Long id) {
+      this.id = id;
     }
 
     public long getProprietaireId() {
@@ -84,11 +90,11 @@ public class HebergementServiceOdt {
         this.image = image;
     }
 
-    public String getNbPlace() {
+    public Integer getNbPlace() {
         return nbPlace;
     }
 
-    public void setNbPlace(String nbPlace) {
+    public void setNbPlace(Integer nbPlace) {
         this.nbPlace = nbPlace;
     }
 

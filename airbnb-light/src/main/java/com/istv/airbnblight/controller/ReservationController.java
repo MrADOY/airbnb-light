@@ -38,8 +38,7 @@ public class ReservationController {
     }
 
     @PostMapping("/reservation")
-    public String listerReservation(@ModelAttribute("reservation") @Valid ReservationServiceOdt resOdt,
-                                      BindingResult result){
+    public String listerReservation(@ModelAttribute("reservation") @Valid ReservationServiceOdt resOdt, BindingResult result){
         Reservation existing = reservationService.save(resOdt);
         return "redirect:/reservation?success";
     }
@@ -52,15 +51,15 @@ public class ReservationController {
         return "reservation_form";
     }
 
-    @GetMapping("/reservation/accepter-reservation")
+    @GetMapping("/reservation/lister-reservation-a-valider")
     public String registerUserAccount(Model model){
         List<Reservation> reservations = reservationService.findByIsConfirmeeTrue();
         model.addAttribute("reservationsAValider", reservations);
         return "reservation_form";
     }
 
-    @GetMapping("/reservation/lister-reservation-a-valider")
-    public String listerReservationAValider(Model model, @RequestParam(name = "id_reservation") long id_reservation){
+    @GetMapping("/reservation/accepter-reservation")
+    public String accepterReservation(Model model, @RequestParam(name = "id_reservation") long id_reservation){
         Reservation reservation = reservationService.findById(id_reservation);
 
         if(reservation != null && !reservation.isConfirmee()){
@@ -69,7 +68,7 @@ public class ReservationController {
         }
 
         model.addAttribute("hebergement", reservation);
-        return "reservation_form";
+        return "reservation";
     }
 
 
