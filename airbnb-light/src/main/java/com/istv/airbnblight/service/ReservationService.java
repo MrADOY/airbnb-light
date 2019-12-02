@@ -15,7 +15,7 @@ public interface ReservationService {
 
     public Reservation findById(Long id);
 
-    public List<Reservation> findByIsConfirmeeTrue();
+    public List<Reservation> findByIsConfirmeeFalse();
 
     List<Reservation> getReservationsAValider();
 

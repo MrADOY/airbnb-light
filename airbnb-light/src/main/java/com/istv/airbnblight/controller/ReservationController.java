@@ -53,7 +53,7 @@ public class ReservationController {
 
     @GetMapping("/reservation/lister-reservation-a-valider")
     public String registerUserAccount(Model model){
-        List<Reservation> reservations = reservationService.findByIsConfirmeeTrue();
+        List<Reservation> reservations = reservationService.findByIsConfirmeeFalse();
         model.addAttribute("reservationsAValider", reservations);
         return "reservation_form";
     }
@@ -70,7 +70,4 @@ public class ReservationController {
         model.addAttribute("hebergement", reservation);
         return "reservation";
     }
-
-
-
 }
