@@ -25,9 +25,9 @@ public class IndexController {
     @Autowired
     private ReservationService reservationService;
 
-    @Autowired
-    @Qualifier("mysqlJdbcTemplate")
-    private JdbcTemplate mysqlTemplate;
+   // @Autowired
+   // @Qualifier("mysqlJdbcTemplate")
+   // private JdbcTemplate mysqlTemplate;
 
     @GetMapping("/")
     public String root() {
@@ -39,49 +39,4 @@ public class IndexController {
         return "login";
     }
 
-    @GetMapping("/user")
-    public String userIndex(Model model) {
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = null;
-        String prenom = null;
-        String nom = null;
-        if (principal instanceof UtilisateurPrincipal) {
-             username = ((UtilisateurPrincipal)principal).getUsername();
-            prenom = ((UtilisateurPrincipal)principal).getFirstName();
-            nom = ((UtilisateurPrincipal)principal).getLastName();
-        } else {
-             username = principal.toString();
-        }
-
-        model.addAttribute("username", username);
-        model.addAttribute("prenom", prenom);
-        model.addAttribute("nom", nom);
-
-        return "user";
-    }
-
-    @GetMapping("/reservation")
-    public String reservationIndex(Model model) {
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        Map<String, Object> map = new HashMap<>();
-
-        // On verifie si l'utilisateur peut reserver
-        String query = "SELECT * FROM UTILISATEUR";
-
-        try {
-            map = mysqlTemplate.queryForMap(query);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println(map);
-
-        model.addAttribute("annonces", herbergementService.findAll());
-        reservationService.findByIsConfirmeeFalse();
-        model.addAttribute("reservationAValider", reservationService.getReservationsAValider());
-
-        return "reservation";
-    }
 }

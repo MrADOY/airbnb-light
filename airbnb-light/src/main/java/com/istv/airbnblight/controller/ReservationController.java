@@ -6,12 +6,21 @@ import com.istv.airbnblight.model.odt.ReservationServiceOdt;
 import com.istv.airbnblight.service.HebergementService;
 import com.istv.airbnblight.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 import javax.validation.Valid;
+import javax.xml.ws.Response;
 import java.util.List;
 
 @Controller
@@ -23,15 +32,32 @@ public class ReservationController {
     @Autowired
     private HebergementService hebergementService;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     @ModelAttribute("reservation")
     public ReservationServiceOdt reservationDto() {
         return new ReservationServiceOdt();
     }
 
+    @Bean("restTemplate")
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    }
+
+    @GetMapping("testaws")
+    public ResponseEntity<Double> testAWS(@Param("euros") double euros){
+        Double quote = restTemplate.getForObject(
+                "https://dpslnby9qb.execute-api.us-east-1.amazonaws.com/default/convertion?euros=5", Double.class);
+        System.out.println(quote);
+        return ResponseEntity.ok(quote);
+    }
+
+
     @GetMapping("/reservation")
     public String reservationIndex(Model model) {
         model.addAttribute("annonces", hebergementService.findAll());
-        reservationService.findByIsConfirmeeTrue();
+        reservationService.findByIsConfirmeeFalse();
         model.addAttribute("reservationAValider", reservationService.getReservationsAValider());
 
         return "reservation";
