@@ -19,6 +19,9 @@ services:
     networks:
       - back
 
+# SPRING_DATASOURCE_URL: jdbc:mysql://airbnb-aws.cnd7rgpx00qm.us-east-1.rds.amazonaws.com:3306/airbnb?useSSL=false
+# SPRING_DATASOURCE_USERNAME: admin
+# SPRING_DATASOURCE_PASSWORD: aqzsaqzs
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password

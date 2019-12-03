@@ -76,16 +76,19 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public List<Reservation> findByIsConfirmeeTrue(){
+    public List<Reservation> findByIsConfirmeeFalse(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        long idUser = 0;
+        if (principal instanceof UtilisateurPrincipal) {
+            idUser = ((UtilisateurPrincipal) principal).getId();
+        }
 
         if(reservationsAValider == null){
             reservationsAValider = new ArrayList<>();
         }
-
-        reservationsAValider = reservationRepository.findByIsConfirmeeFalse();
-
-
-        return reservationsAValider;
+        reservationsAValider = reservationRepository.findByIsConfirmeeFalseAndHebergementProprietaireId(idUser);
+       return reservationsAValider;
 
     }
 
