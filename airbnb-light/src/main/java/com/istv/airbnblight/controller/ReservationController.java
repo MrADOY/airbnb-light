@@ -45,15 +45,6 @@ public class ReservationController {
         return builder.build();
     }
 
-    @GetMapping("testaws")
-    public ResponseEntity<Double> testAWS(@Param("euros") double euros){
-        Double quote = restTemplate.getForObject(
-                "https://dpslnby9qb.execute-api.us-east-1.amazonaws.com/default/convertion?euros=5", Double.class);
-        System.out.println(quote);
-        return ResponseEntity.ok(quote);
-    }
-
-
     @GetMapping("/reservation")
     public String reservationIndex(Model model) {
         model.addAttribute("annonces", hebergementService.findAll());

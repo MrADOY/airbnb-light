@@ -23,8 +23,13 @@ public class HebergementServiceImpl implements HebergementService {
     private UtilisateurRepository utilisateurRepository;
 
     public List<Hebergement> findAll(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Long idProprio = ((UtilisateurPrincipal) principal).getId();
+
         return StreamSupport
                 .stream(hebergementRepository.findAll().spliterator(), false)
+                .filter(h -> !h.getProprietaire().getId().equals(idProprio))
                 .collect(Collectors.toList());
     }
 

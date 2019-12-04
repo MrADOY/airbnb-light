@@ -7,6 +7,8 @@ import com.istv.airbnblight.service.HebergementService;
 import com.istv.airbnblight.service.ReservationService;
 import com.istv.airbnblight.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +32,14 @@ public class HebergementController {
     Hebergement hebergement = hebergementService.findById(id);
 
     model.addAttribute("hebergement", hebergement);
+    return "hebergement";
+  }
+
+  @GetMapping("reservation/getprix-dollars")
+  public String testAWS(Model model, @Param("euros") double euros){
+    Double dollars = restTemplate.getForObject(
+            "https://dpslnby9qb.execute-api.us-east-1.amazonaws.com/default/convertion?euros=" + euros, Double.class);
+    model.addAttribute("dollars", dollars);
     return "hebergement";
   }
 
