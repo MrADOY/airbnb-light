@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.context.annotation.Bean;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 
 import javax.validation.Valid;
 
@@ -25,6 +27,11 @@ public class HebergementController {
 
   @Autowired
   private RestTemplate restTemplate;
+
+  @Bean("restTemplate")
+  public RestTemplate restTemplate(RestTemplateBuilder builder) {
+    return builder.build();
+  }
 
   @ModelAttribute("hebergement")
   public HebergementServiceOdt hebergementDto() {
