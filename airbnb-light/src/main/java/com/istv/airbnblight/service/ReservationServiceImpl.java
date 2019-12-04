@@ -23,76 +23,101 @@ import java.util.Optional;
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ReservationServiceImpl implements ReservationService {
 
-    public List<Reservation> reservationsAValider;
+  public List<Reservation> reservationsAValider;
 
-    @Autowired
-    ReservationRepository reservationRepository;
+  @Autowired
+  ReservationRepository reservationRepository;
 
-    @Autowired
-    HebergementRepository hebergementRepository;
+  @Autowired
+  HebergementRepository hebergementRepository;
 
-    @Autowired
-    UtilisateurRepository utilisateurRepository;
+  @Autowired
+  UtilisateurRepository utilisateurRepository;
 
-    @Override
-    public Reservation save(ReservationServiceOdt registration){
+  @Override
+  public Reservation save(ReservationServiceOdt registration){
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        long idLocataire = 0;
-        if (principal instanceof UtilisateurPrincipal) {
-            idLocataire = ((UtilisateurPrincipal) principal).getId();
-        }
-
-        Reservation res = new Reservation();
-        res.setLocataire(utilisateurRepository.findById(idLocataire).get());
-
-        Hebergement her = hebergementRepository.findById(registration.getIdHebergement()).get();
-        her.setAvailable(false);
-        hebergementRepository.save(her);
-        res.setStart(registration.getStart());
-        res.setEnd(registration.getEnd());
-        res.setHebergement(her);
-        return reservationRepository.save(res);
+    long idLocataire = 0;
+    if (principal instanceof UtilisateurPrincipal) {
+      idLocataire = ((UtilisateurPrincipal) principal).getId();
     }
 
-    @Override
-    public Reservation save(Reservation registration){
-        return reservationRepository.save(registration);
+    Reservation res = new Reservation();
+    res.setLocataire(utilisateurRepository.findById(idLocataire).get());
+
+    Hebergement her = hebergementRepository.findById(registration.getIdHebergement()).get();
+    her.setAvailable(false);
+    hebergementRepository.save(her);
+    res.setStart(registration.getStart());
+    res.setEnd(registration.getEnd());
+    res.setHebergement(her);
+    return reservationRepository.save(res);
+  }
+
+  @Override
+  public Reservation save(Reservation registration){
+    return reservationRepository.save(registration);
+  }
+
+  @Override
+  public Reservation findById(Long idReservation){
+    Optional<Reservation> reservation = reservationRepository.findById(idReservation);
+
+    if(reservation.isPresent()){
+      reservation.get().setConfirmee(true);
+      reservationRepository.save(reservation.get());
+      return reservation.get();
+    } else {
+      return null;
     }
 
-    @Override
-    public Reservation findById(Long idReservation){
-        Optional<Reservation> reservation = reservationRepository.findById(idReservation);
+  }
 
-        if(reservation.isPresent()){
-            reservation.get().setConfirmee(true);
-            reservationRepository.save(reservation.get());
-            return reservation.get();
-        } else {
-            return null;
-        }
+  @Override
+  public List<Reservation> findByIsConfirmeeFalse(){
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+    long idUser = 0;
+    if (principal instanceof UtilisateurPrincipal) {
+      idUser = ((UtilisateurPrincipal) principal).getId();
     }
 
-    @Override
-    public List<Reservation> findByIsConfirmeeFalse(){
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        long idUser = 0;
-        if (principal instanceof UtilisateurPrincipal) {
-            idUser = ((UtilisateurPrincipal) principal).getId();
-        }
-
-        if(reservationsAValider == null){
-            reservationsAValider = new ArrayList<>();
-        }
-        reservationsAValider = reservationRepository.findByIsConfirmeeFalseAndHebergementProprietaireId(idUser);
-       return reservationsAValider;
-
+    if(reservationsAValider == null){
+      reservationsAValider = new ArrayList<>();
     }
+    reservationsAValider = reservationRepository.findByIsConfirmeeFalseAndHebergementProprietaireId(idUser);
+    return reservationsAValider;
 
-    public List<Reservation> getReservationsAValider() {
-        return reservationsAValider;
+  }
+
+  public List<Reservation> getReservationsAValider() {
+    return reservationsAValider;
+  }
+
+  @Override
+  public List<Reservation> findReservationUtilisateur() {
+
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+    long idUser = 0;
+    if (principal instanceof UtilisateurPrincipal) {
+      idUser = ((UtilisateurPrincipal) principal).getId();
     }
+    return reservationRepository.findByLocataire(idUser);
+  }
+
+  @Override
+  public List<Reservation> findReservationHebergementUtilisateur() {
+
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+    long idUser = 0;
+    if (principal instanceof UtilisateurPrincipal) {
+      idUser = ((UtilisateurPrincipal) principal).getId();
+    }
+        
+    return reservationRepository.findByHebergementProprietaireId(idUser);
+  }
 }

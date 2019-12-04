@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{template.html}">
+<head>
+  <title>Votre compte</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/rg-1.1.1/rr-1.2.6/sc-2.0.1/datatables.min.css"/>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-colvis-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/rg-1.1.1/rr-1.2.6/sc-2.0.1/datatables.min.js"></script>
+
+  <script type="text/javascript">
+  $.extend( true, $.fn.dataTable.defaults, {
+    iDisplayLength: 10,
+    aLengthMenu: [
+      [5, 10, 25, 50, 100, 200, -1],
+      [5, 10, 25, 50, 100, 200, 'Tout']
+    ],
+    oLanguage: {
+      sProcessing:     'Traitement en cours...',
+      sSearch:         'Recherche rapide&nbsp;:',
+      sLengthMenu:     'Afficher _MENU_ &eacute;l&eacute;ments',
+      sInfoPostFix:    '',
+      sLoadingRecords: 'Chargement en cours...',
+      sZeroRecords:    'Aucun &eacute;l&eacute;ment &agrave; afficher',
+      sEmptyTable:     'Aucune donn&eacute;e disponible dans le tableau',
+      oPaginate: {
+        sFirst:      'Premier',
+        sPrevious:   'Pr&eacute;c&eacute;dent',
+        sNext:       'Suivant',
+        sLast:       'Dernier'
+      },
+      oAria: {
+        sSortAscending:  ': activer pour trier la colonne par ordre croissant',
+        sSortDescending: ': activer pour trier la colonne par ordre d&eacute;croissant'
+      },
+    },
+    bInfo : false,
+    dom:'Bfrti',
+    deferRender: true,
+    deferLoading: 0, // In this case we want the table load on request so initial automatical load is not desired
+    fnInitComplete: function(oSettings, json) {
+      $('.dataTables_length').css('float', 'left');
+      $('.dataTables_length select').addClass('form-input');
+      $('.dataTables_filter input').addClass('form-input');
+      // $('.export').addClass('btn btn-primary txt-white form-group');
+      $('.dt-buttons').show(200);
+      $(".dt-buttons button").toggleClass('btn-secondary btn-primary');
+      $(".dt-buttons.btn-group").addClass('text-right');
+    }
+  });
+</script>
+
+<script type="text/javascript">
+$(document).ready( function () {
+  var table = $('.datatable').DataTable({
+    dom: 'lfrBtip',
+    columns: [
+      null,
+      null,
+      null,
+      null,
+      { "searchable": false, "orderable": false },
+    ],
+    buttons: []
+  });
+});
+</script>
+</head>
+<body>
+  <section layout:fragment="body">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Vos demandes</h1>
+          <table class="table table-striped table-no-bordered table-hover dtr-inline datatable">
+            <thead>
+              <tr>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Hébergement</th>
+                <th>Propriétaire</th>
+                <th>Confirmation</th>
+                <th class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="reservation : ${reservationsUtilisateur}" th:classappend="${!reservation.is_confirmee ? 'table-warning':''}">
+                <td><span th:text="${reservation.start}"></span></td>
+                <td><span th:text="${reservation.end}"></span></td>
+                <td><span th:text="${reservation.hebergement.nom}"></span></td>
+                <td><span th:text="${reservation.hebergement.proprietaire.firstName + ' ' + reservation.hebergement.proprietaire.lastName}"></span></td>
+                <td><span th:text="${reservation.is_confirmee}"></span></td>
+                <td class="text-right">
+                  <a class="btn btn-info btn-fab btn-round" th:href="@{/hebergement/{id}/show(id=${reservation.hebergement.id})}"><i class="material-icons">visibility</i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

@@ -13,4 +13,8 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
 
     List<Reservation> findByIsConfirmeeFalseAndHebergementProprietaireId(Long idUser);
 
+    List<Reservation> findByHebergementProprietaireId(Long idUser);
+
+    List<Reservation> findByLocataire(Long idUser);
+
 }

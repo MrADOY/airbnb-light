@@ -16,9 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-// import org.springframework.boot.web.client.RestTemplateBuilder;
-// import org.springframework.context.annotation.Bean;
-// import org.springframework.web.client.RestTemplate;
 import javax.validation.Valid;
 import javax.xml.ws.Response;
 import java.util.List;
@@ -32,19 +29,10 @@ public class ReservationController {
     @Autowired
     private HebergementService hebergementService;
 
-    // @Autowired
-    // private RestTemplate restTemplate;
-    //
-    // @Bean("restTemplate")
-    // public RestTemplate restTemplate(RestTemplateBuilder builder) {
-    //   return builder.build();
-    // }
-
     @ModelAttribute("reservation")
     public ReservationServiceOdt reservationDto() {
         return new ReservationServiceOdt();
     }
-
 
     @GetMapping("/reservation")
     public String reservationIndex(Model model) {
@@ -87,5 +75,13 @@ public class ReservationController {
 
         model.addAttribute("hebergement", reservation);
         return "reservation";
+    }
+
+    @GetMapping("reservations-users")
+    public String listerToutesReservations(Model model){
+      model.addAttribute("reservationsHebergements", reservationService.findReservationHebergementUtilisateur());
+      // model.addAttribute("reservationsUtilisateur", reservationService.findReservationUtilisateur());
+
+      return "reservations-user";
     }
 }

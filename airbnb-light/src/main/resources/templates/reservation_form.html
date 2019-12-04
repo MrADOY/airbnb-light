@@ -4,8 +4,74 @@ layout:decorate="~{template.html}">
 <head>
   <title>Enregistrement</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.css" />
+  <script th:src="@{/js/bootstrap-datetimepicker.js}"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker-standalone.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
+
+  <script type="text/javascript">
+
+  $(document).ready(function() {
+    // initialise Datetimepicker
+    $(".datetimepicker").datetimepicker({
+      locale: "fr",
+      icons:{
+        time:"fa fa-clock-o",
+        date:"fa fa-calendar",
+        up:"fa fa-chevron-up",
+        down:"fa fa-chevron-down",
+        previous:"fa fa-chevron-left",next:"fa fa-chevron-right",
+        today:"fa fa-screenshot",
+        clear:"fa fa-trash",
+        close:"fa fa-remove"
+      }
+    });
+    $(".datepicker").datetimepicker({
+      locale: "fr",
+      format:"DD/MM/YYYY",
+      icons:{
+        time:"fa fa-clock-o",
+        date:"fa fa-calendar",
+        up:"fa fa-chevron-up",
+        down:"fa fa-chevron-down",
+        previous:"fa fa-chevron-left",
+        next:"fa fa-chevron-right",
+        today:"fa fa-screenshot",
+        clear:"fa fa-trash",
+        close:"fa fa-remove"
+      }
+    });
+    $(".timepicker").datetimepicker({
+      // defaultDate: "2019-11-28 09:00",
+      locale: "fr",
+      format:"H:mm",
+      icons:{
+        time:"fa fa-clock-o",
+        date:"fa fa-calendar",
+        up:"fa fa-chevron-up",
+        down:"fa fa-chevron-down",
+        previous:"fa fa-chevron-left",
+        next:"fa fa-chevron-right",
+        today:"fa fa-screenshot",
+        clear:"fa fa-trash",
+        close:"fa fa-remove"
+      }
+    });
+
+    $("#start").on('dp.change', function(e){
+      $('#end').data("DateTimePicker").minDate(e.date);
+      $('#end').data("DateTimePicker").clear();
+    })
+
+    $('#reservationform').submit(function(event) {
+      event.preventDefault(); //this will prevent the default submit
+      $('#start').val($('#start').data("DateTimePicker").viewDate().format("YYYY-MM-DD"))
+      $('#end').val($('#end').data("DateTimePicker").viewDate().format("YYYY-MM-DD"))
+      $(this).unbind('submit').submit(); // continue the submit unbind preventDefault
+    })
+  });
+
+</script>
 </head>
 <body>
   <section layout:fragment="body">
@@ -13,7 +79,7 @@ layout:decorate="~{template.html}">
       <div class="row">
         <div class="col-md-12">
           <h1 class="text-center">Demande de location</h1>
-          <form th:action="@{/reservation}" th:object="${reservation}" method="post">
+          <form id="reservationform" th:action="@{/reservation}" th:object="${reservation}" method="post">
             <input name="idHebergement" type="hidden" th:value="${hebergement.id}" />
             <div class="form-group" th:classappend="${#fields.hasErrors('start')}? 'has-error':''">
               <label for="start" class="control-label">Date d'arrivée</label>
@@ -33,67 +99,5 @@ layout:decorate="~{template.html}">
       </div>
     </div>
   </section>
-  <script type="text/javascript">
-
-  $(document).ready(function() {
-    // initialise Datetimepicker and Sliders
-    $(".datetimepicker").datetimepicker({
-      locale: "fr",
-      showClear: true,
-      showClose: true,
-      icons:{
-        time:"fa fa-clock-o",
-        date:"fa fa-calendar",
-        up:"fa fa-chevron-up",
-        down:"fa fa-chevron-down",
-        previous:"fa fa-chevron-left",next:"fa fa-chevron-right",
-        today:"fa fa-screenshot",
-        clear:"fa fa-trash",
-        close:"fa fa-remove"
-      }
-    });
-    $(".datepicker").datetimepicker({
-      locale: "fr",
-      format:"DD/MM/YYYY",
-      showClear: true,
-      showClose: true,
-      icons:{
-        time:"fa fa-clock-o",
-        date:"fa fa-calendar",
-        up:"fa fa-chevron-up",
-        down:"fa fa-chevron-down",
-        previous:"fa fa-chevron-left",
-        next:"fa fa-chevron-right",
-        today:"fa fa-screenshot",
-        clear:"fa fa-trash",
-        close:"fa fa-remove"
-      }
-    });
-    $(".timepicker").datetimepicker({
-      // defaultDate: "2019-11-28 09:00",
-      locale: "fr",
-      format:"H:mm",
-      showClear: true,
-      showClose: true,
-      icons:{
-        time:"fa fa-clock-o",
-        date:"fa fa-calendar",
-        up:"fa fa-chevron-up",
-        down:"fa fa-chevron-down",
-        previous:"fa fa-chevron-left",
-        next:"fa fa-chevron-right",
-        today:"fa fa-screenshot",
-        clear:"fa fa-trash",
-        close:"fa fa-remove"
-      }
-    });
-
-    $("#start").on('dp.change', function(e){
-      $('#end').data("DateTimePicker").minDate(e.date);
-      $('#end').data("DateTimePicker").clear();
-    })
-  });
-
-</script>
 </body>
 </html>

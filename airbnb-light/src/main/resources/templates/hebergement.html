@@ -26,8 +26,14 @@ layout:decorate="~{template.html}">
               <div class="card-description" th:text="${hebergement.description}"></div>
             </div>
             <div class="card-footer">
-              <div class="price" th:if="${hebergement.prixJour}"><span th:text="${hebergement.prixJour + ' € / jour'}"></span></div>
-              <div class="price" th:if="${hebergement.prixPers}"><span th:text="${hebergement.prixPers + ' € / jour'}"></span></div>
+              <div class="d-flex">
+                <div class="price" th:if="${hebergement.prixJour}"><span th:text="${hebergement.prixJour + ' € / jour'}"></span></div>
+                <div class="ml-2 price" th:if="${prixJourDollars}"><span th:text="${'(soit ' + prixJourDollars + ' $ / jour)'}"></span></div>
+              </div>
+              <div class="d-flex">
+                <div class="price" th:if="${hebergement.prixPers}"><span th:text="${hebergement.prixPers + ' € / personne'}"></span></div>
+                <div class="ml-2 price" th:if="${prixPersDollars}"><span th:text="${'(soit ' + prixPersDollars + ' $ / personne)'}"></span></div>
+              </div>
               <div class="reservation">
                 <a th:if="${hebergement.available}" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="" data-original-title="Réserver"  th:href="@{/reservation/reserver(id_hebergement=${hebergement.id})}">
                   <i class="material-icons">home</i>

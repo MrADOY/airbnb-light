@@ -19,4 +19,8 @@ public interface ReservationService {
 
     List<Reservation> getReservationsAValider();
 
+    List<Reservation> findReservationHebergementUtilisateur();
+
+    List<Reservation> findReservationUtilisateur();
+
 }

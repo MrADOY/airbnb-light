@@ -41,12 +41,20 @@ public class HebergementController {
   @GetMapping("/hebergement/{id}/show")
   public String showHebergement(@PathVariable long id, Model model) {
     Hebergement hebergement = hebergementService.findById(id);
-
+    if (hebergement.getPrixPers() != null) {
+      Double prixPersDollars = restTemplate.getForObject(
+      "https://dpslnby9qb.execute-api.us-east-1.amazonaws.com/default/convertion?euros=" + hebergement.getPrixPers(), Double.class);
+      model.addAttribute("prixPersDollars", prixPersDollars);
+    }
+    else if (hebergement.getPrixJour() != null) {
+      Double prixJourDollars = restTemplate.getForObject("https://dpslnby9qb.execute-api.us-east-1.amazonaws.com/default/convertion?euros=" + hebergement.getPrixJour(), Double.class);
+      model.addAttribute("prixJourDollars", prixJourDollars);
+    }
     model.addAttribute("hebergement", hebergement);
     return "hebergement";
   }
 
-  @GetMapping("reservation/getprix-dollars")
+  @GetMapping("/hebergement/getprix-dollars")
   public String testAWS(Model model, @Param("euros") double euros){
     Double dollars = restTemplate.getForObject(
             "https://dpslnby9qb.execute-api.us-east-1.amazonaws.com/default/convertion?euros=" + euros, Double.class);
