@@ -1,5 +1,6 @@
 package com.istv.airbnblight.controller;
 
+import com.istv.airbnblight.model.Facturation;
 import com.istv.airbnblight.model.Hebergement;
 import com.istv.airbnblight.model.Reservation;
 import com.istv.airbnblight.config.UtilisateurPrincipal;
@@ -8,6 +9,8 @@ import com.istv.airbnblight.model.odt.ReservationServiceOdt;
 import com.istv.airbnblight.service.HebergementService;
 import com.istv.airbnblight.service.ReservationService;
 import com.istv.airbnblight.service.UtilisateurService;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -22,6 +25,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.validation.Valid;
 import javax.xml.ws.Response;
+import java.awt.*;
 import java.util.List;
 
 @Controller
@@ -35,6 +39,9 @@ public class ReservationController {
 
   @Autowired
   private UtilisateurService utilisateurService;
+
+  @Autowired
+  private KafkaTemplate<String, String> template;
 
   @ModelAttribute("reservation")
   public ReservationServiceOdt reservationDto() {
@@ -84,6 +91,8 @@ public class ReservationController {
       reservation.setConfirmee(true);
       reservationService.save(reservation);
     }
+
+    this.template.send("montants", reservation.getHebergement().getPrixJour()+";"+reservation.getLocataire().getId());
 
     model.addAttribute("hebergement", reservation);
     return "reservation";

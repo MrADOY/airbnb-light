@@ -12,15 +12,12 @@ services:
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/airbnb?useSSL=false
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: nimporte
+      SPRING_DATASOURCE_URL: jdbc:mysql://airbnb-aws.cnd7rgpx00qm.us-east-1.rds.amazonaws.com:3306/airbnb?useSSL=false
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: aqzsaqzs
     networks:
       - back
 
-# SPRING_DATASOURCE_URL: jdbc:mysql://airbnb-aws.cnd7rgpx00qm.us-east-1.rds.amazonaws.com:3306/airbnb?useSSL=false
-# SPRING_DATASOURCE_USERNAME: admin
-# SPRING_DATASOURCE_PASSWORD: aqzsaqzs
   db:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
