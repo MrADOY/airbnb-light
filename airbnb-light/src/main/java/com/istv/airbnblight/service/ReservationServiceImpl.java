@@ -25,6 +25,10 @@ public class ReservationServiceImpl implements ReservationService {
 
   public List<Reservation> reservationsAValider;
 
+  public List<Reservation> reservationsUtilisateur;
+
+  public List<Reservation> reservationsHebergementUtilisateur;
+
   @Autowired
   ReservationRepository reservationRepository;
 
@@ -105,7 +109,12 @@ public class ReservationServiceImpl implements ReservationService {
     if (principal instanceof UtilisateurPrincipal) {
       idUser = ((UtilisateurPrincipal) principal).getId();
     }
-    return reservationRepository.findByLocataire(idUser);
+
+    if(reservationsUtilisateur == null){
+      reservationsUtilisateur = new ArrayList<>();
+    }
+    reservationsUtilisateur = reservationRepository.findByLocataireId(idUser);
+    return reservationsUtilisateur;
   }
 
   @Override
@@ -117,7 +126,11 @@ public class ReservationServiceImpl implements ReservationService {
     if (principal instanceof UtilisateurPrincipal) {
       idUser = ((UtilisateurPrincipal) principal).getId();
     }
-        
-    return reservationRepository.findByHebergementProprietaireId(idUser);
+
+    if(reservationsHebergementUtilisateur == null){
+      reservationsHebergementUtilisateur = new ArrayList<>();
+    }
+    reservationsHebergementUtilisateur = reservationRepository.findByHebergementProprietaireId(idUser);
+    return reservationsHebergementUtilisateur;
   }
 }

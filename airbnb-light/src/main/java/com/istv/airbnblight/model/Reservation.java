@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.istv.airbnblight.model.Utilisateur;
+import com.istv.airbnblight.model.Hebergement;
 
 @Entity
 public class Reservation {
@@ -34,7 +35,7 @@ public class Reservation {
     }
 
     public void setConfirmee(boolean confirmee) {
-        isConfirmee = confirmee;
+        this.isConfirmee = confirmee;
     }
 
     public Hebergement getHebergement() {

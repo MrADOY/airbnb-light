@@ -3,10 +3,13 @@ package com.istv.airbnblight.model.odt;
 import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.istv.airbnblight.model.Utilisateur;
+import com.istv.airbnblight.model.Hebergement;
 
 public class ReservationServiceOdt {
 
     private long idHebergement;
+
+    private Hebergement hebergement;
 
     private Utilisateur locataire;
 
@@ -16,7 +19,25 @@ public class ReservationServiceOdt {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date end;
 
+    private boolean is_confirmee;
+
+    public boolean isConfirmee() {
+        return is_confirmee;
+    }
+
+    public void setConfirmee(boolean confirmee) {
+        this.is_confirmee = confirmee;
+    }
+
     public ReservationServiceOdt() {
+    }
+
+    public Hebergement getHebergement() {
+        return hebergement;
+    }
+
+    public void setHebergement(Hebergement hebergement) {
+        this.hebergement = hebergement;
     }
 
     public long getIdHebergement() {

@@ -80,7 +80,7 @@ public class ReservationController {
     @GetMapping("reservations-users")
     public String listerToutesReservations(Model model){
       model.addAttribute("reservationsHebergements", reservationService.findReservationHebergementUtilisateur());
-      // model.addAttribute("reservationsUtilisateur", reservationService.findReservationUtilisateur());
+      model.addAttribute("reservationsUtilisateur", reservationService.findReservationUtilisateur());
 
       return "reservations-user";
     }

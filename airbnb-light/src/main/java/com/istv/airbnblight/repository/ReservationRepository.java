@@ -15,6 +15,6 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
 
     List<Reservation> findByHebergementProprietaireId(Long idUser);
 
-    List<Reservation> findByLocataire(Long idUser);
+    List<Reservation> findByLocataireId(Long idUser);
 
 }
