@@ -1,7 +1,6 @@
-# Use root/example as user/password credentials
 version: '3.1'
 
-services:   
+services:
   spring:
     build:
       context: ./airbnb-light
@@ -10,7 +9,7 @@ services:
       - 8081:8081
       - 8000:8000
     restart: "no"
-    depends_on: 
+    depends_on:
       - db
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/airbnb?useSSL=false
@@ -39,7 +38,7 @@ services:
   adminer:
     image: adminer
     restart: "no"
-    depends_on: 
+    depends_on:
       - db
     ports:
       - 8082:8080
