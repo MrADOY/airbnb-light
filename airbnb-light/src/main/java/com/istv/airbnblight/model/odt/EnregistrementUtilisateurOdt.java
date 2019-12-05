@@ -12,6 +12,7 @@ public class EnregistrementUtilisateurOdt {
     private String confirmPassword;
     private String email;
     private String confirmEmail;
+    private Boolean blacklisted;
 
     public String getFirstName() {
         return firstName;
@@ -59,6 +60,14 @@ public class EnregistrementUtilisateurOdt {
 
     public void setConfirmEmail(String confirmEmail) {
         this.confirmEmail = confirmEmail;
+    }
+
+    public boolean isBlacklisted() {
+        return blacklisted;
+    }
+
+    public void setBlacklisted(boolean blacklisted) {
+        this.blacklisted = blacklisted;
     }
 
 }

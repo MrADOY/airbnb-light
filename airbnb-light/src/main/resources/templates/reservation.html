@@ -92,8 +92,8 @@ $(document).ready( function () {
                 <td class="text-right">
                   <div th:switch="${annonce.available}">
                     <a class="btn btn-info btn-fab btn-round" th:href="@{/hebergement/{id}/show(id=${annonce.id})}"><i class="material-icons">visibility</i></a>
-                    <a th:case="true" class="btn btn-success" th:href="@{/reservation/reserver(id_hebergement=${annonce.id})}">Réserver ce bien</a>
-                    <a th:case="false" class="btn btn-danger disabled text-white" role="button" aria-disabled="true">Bien indisponible</a>
+                    <a th:case="true" class="btn btn-success btn-round p-2" th:href="@{/reservation/reserver(id_hebergement=${annonce.id})}" th:if="${!utilisateur.isBlacklisted()}">Réserver ce bien</a>
+                    <a th:case="false" class="btn btn-danger disabled text-white btn-round p-2" role="button" aria-disabled="true" th:if="${!utilisateur.isBlacklisted()}">Bien indisponible</a>
                   </div>
                 </td>
               </tr>

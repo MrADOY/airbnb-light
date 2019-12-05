@@ -16,9 +16,10 @@ layout:decorate="~{template.html}">
                 <img class="img" src="https://images.unsplash.com/photo-1492447273231-0f8fecec1e3a?auto=format&fit=crop&h=800&w=800&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D">
               </a>
             </div>
-            <div class="card-body ">
+            <div class="card-body">
               <h4 class="card-title" th:text="${utilisateur.lastName + ' ' + utilisateur.firstName}"></h4>
-              <h6 class="card-category text-gray" th:text="${utilisateur.email}"></h6>
+              <h5 class="card-category text-gray" th:text="${utilisateur.email}"></h5>
+              <h6 class="card-category text-danger" th:if="${utilisateur.isBlacklisted()}">Votre compte est blacklisté, vous ne pouvez plus réserver</h6>
             </div>
             <div class="card-footer justify-content-center">
               <!-- <a th:href="@{/logout}" class="btn btn-info btn-fab btn-fab-mini btn-round">

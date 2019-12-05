@@ -34,6 +34,8 @@ public class Utilisateur {
 
     private String password;
 
+    private boolean blacklisted = false;
+
     @OneToMany(mappedBy="proprietaire")
     private List<Hebergement> hebergements;
 
@@ -103,6 +105,14 @@ public class Utilisateur {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isBlacklisted() {
+        return blacklisted;
+    }
+
+    public void setBlacklisted(boolean blacklisted) {
+        this.blacklisted = blacklisted;
     }
 
     public Collection<Role> getRoles() {
