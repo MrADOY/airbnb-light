@@ -30,8 +30,6 @@ layout:decorate="~{template.html}">
                 <div class="d-flex col-md-4">
                   <div class="price" th:if="${hebergement.prixJour}"><span th:text="${hebergement.prixJour + ' € / jour'}"></span></div>
                   <div class="ml-2 price" th:if="${prixJourDollars}"><span th:text="${'(soit ' + prixJourDollars + ' $ / jour)'}"></span></div>
-                </div>
-                <div class="d-flex col-md-4">
                   <div class="price" th:if="${hebergement.prixPers}"><span th:text="${hebergement.prixPers + ' € / personne'}"></span></div>
                   <div class="ml-2 price" th:if="${prixPersDollars}"><span th:text="${'(soit ' + prixPersDollars + ' $ / personne)'}"></span></div>
                 </div>
